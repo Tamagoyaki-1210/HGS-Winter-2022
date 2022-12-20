@@ -355,7 +355,6 @@ CObject_2D* CObject_2D::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 		return nullptr;
 	}
 
-	pObject2D->Init();
 	pObject2D->SetPos(pos);
 	pObject2D->SetSize(size);
 
