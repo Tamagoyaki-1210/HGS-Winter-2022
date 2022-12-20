@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="プログラムファイル">
+      <UniqueIdentifier>{1178962c-1208-425a-8503-dcc85a3b04e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プログラムファイル\00_Basis">
+      <UniqueIdentifier>{10193a43-f06f-4d50-88b3-9cb833581600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プログラムファイル\01_Mode">
+      <UniqueIdentifier>{79afb3b9-76d0-4cd0-bf8d-b850d8438819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プログラムファイル\02_Input">
+      <UniqueIdentifier>{c91ff1f1-0a27-410a-9a77-a8a1cb36ca6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プログラムファイル\03_Object">
+      <UniqueIdentifier>{ca9f1b2b-4677-4515-884d-3ea7504bff44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プログラムファイル\03_Object\Object2D">
+      <UniqueIdentifier>{e8d7f990-cdbe-4eae-b5d1-aac678fa4e25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プログラムファイル\03_Object\Object2D\Number">
+      <UniqueIdentifier>{7c0c46fc-e7fe-40c4-8d67-95dbbf33fdc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プログラムファイル\03_Object\Object2D\Font">
+      <UniqueIdentifier>{5c692cb2-9b46-40be-af5b-9aed8e692bb9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="title.cpp">
+      <Filter>プログラムファイル\01_Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="mode.cpp">
+      <Filter>プログラムファイル\01_Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>プログラムファイル\01_Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>プログラムファイル\01_Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="application.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
+    <ClCompile Include="debugProc.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>プログラムファイル\03_Object\Object2D\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="fontString.cpp">
+      <Filter>プログラムファイル\03_Object\Object2D\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="inputKeyboard.cpp">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="inputMouse.cpp">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="inputPad.cpp">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
+    <ClCompile Include="number.cpp">
+      <Filter>プログラムファイル\03_Object\Object2D\Number</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>プログラムファイル\03_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="object2D.cpp">
+      <Filter>プログラムファイル\03_Object\Object2D</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>プログラムファイル\03_Object\Object2D\Number</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game.h">
+      <Filter>プログラムファイル\01_Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="mode.h">
+      <Filter>プログラムファイル\01_Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>プログラムファイル\01_Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>プログラムファイル\01_Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClInclude>
+    <ClInclude Include="debugProc.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>プログラムファイル\03_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="inputKeyboard.h">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="inputMouse.h">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="inputPad.h">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
+      <Filter>プログラムファイル\03_Object\Object2D\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="fontString.h">
+      <Filter>プログラムファイル\03_Object\Object2D\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="number.h">
+      <Filter>プログラムファイル\03_Object\Object2D\Number</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
+      <Filter>プログラムファイル\03_Object\Object2D\Number</Filter>
+    </ClInclude>
+    <ClInclude Include="object2D.h">
+      <Filter>プログラムファイル\03_Object\Object2D</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
