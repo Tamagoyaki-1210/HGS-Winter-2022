@@ -31,7 +31,7 @@ public:
 	void Draw() override;
 
 	void SetNumber(int nScore);
-	static CNumber *Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size);
+	static CNumber* Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size);
 private:
 	
 };

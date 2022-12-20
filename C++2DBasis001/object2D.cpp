@@ -346,9 +346,9 @@ void CObject_2D::SetAnimDiv(int nDivX, int nDivY)
 //=====================================
 // オブジェクト2D生成処理
 //=====================================
-CObject_2D *CObject_2D::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+CObject_2D* CObject_2D::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	CObject_2D *pObject2D = new CObject_2D;
+	CObject_2D* pObject2D = new CObject_2D;
 
 	if (FAILED(pObject2D->Init()))
 	{

@@ -7,6 +7,7 @@
 #include "debugProc.h"
 #include "application.h"
 #include "renderer.h"
+#include "main.h"
 
 LPD3DXFONT CDebugProc::m_pFont = nullptr;
 std::string CDebugProc::m_str = "";

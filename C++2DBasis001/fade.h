@@ -61,4 +61,4 @@ private:
 
 };
 
-#endif // !_PLAYER_H_
+#endif // !_FADE_H_

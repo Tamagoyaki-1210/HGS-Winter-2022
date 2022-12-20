@@ -116,7 +116,7 @@ void CScore::AddScore(int nValue)
 //=====================================
 // ê∂ê¨èàóù
 //=====================================
-CScore *CScore::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
+CScore* CScore::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
 {
 	CScore* pScore = new CScore;
 

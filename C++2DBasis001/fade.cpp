@@ -7,6 +7,7 @@
 #include "fade.h"
 #include "application.h"
 #include "renderer.h"
+#include "main.h"
 
 //---------------------------------------------------------
 // ƒ}ƒNƒ’è‹`

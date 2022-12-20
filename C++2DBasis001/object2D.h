@@ -58,7 +58,7 @@ public:
 	const D3DXVECTOR3& GetRot() const { return m_rot; }
 	const D3DXVECTOR2& GetSize() const { return m_size; }
 
-	static CObject_2D *Create(D3DXVECTOR3 pos, D3DXVECTOR2 size);
+	static CObject_2D* Create(D3DXVECTOR3 pos, D3DXVECTOR2 size);
 
 private:
 
