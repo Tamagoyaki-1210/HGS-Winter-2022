@@ -1,4 +1,4 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // object2D.cpp
 // Author : Tanimoto Kosuke
@@ -9,7 +9,7 @@
 #include "application.h"
 
 //=====================================
-// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CObject_2D::CObject_2D() : CObject(), m_pVtxBuff(nullptr)
 {
@@ -17,7 +17,7 @@ CObject_2D::CObject_2D() : CObject(), m_pVtxBuff(nullptr)
 }
 
 //=====================================
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CObject_2D::CObject_2D(const int nPriority) : CObject(nPriority), m_pVtxBuff(nullptr)
 {
@@ -25,7 +25,7 @@ CObject_2D::CObject_2D(const int nPriority) : CObject(nPriority), m_pVtxBuff(nul
 }
 
 //=====================================
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CObject_2D::~CObject_2D()
 {
@@ -33,82 +33,82 @@ CObject_2D::~CObject_2D()
 }
 
 //=====================================
-// ‰Šú‰»ˆ—
+// åˆæœŸåŒ–å‡¦ç†
 //=====================================
 HRESULT CObject_2D::Init()
 {
-	m_pos = Vec3Null;
-	m_rot = Vec3Null;
-	m_size = Vec2Null;
+    m_pos = Vec3Null;
+    m_rot = Vec3Null;
+    m_size = Vec2Null;
 
-	m_fAngle = 0.0f;
-	m_nAnimColumn = 0;
-	m_nAnimLine = 0;
-	m_nAnimControl = 0;
+    m_fAngle = 0.0f;
+    m_nAnimColumn = 0;
+    m_nAnimLine = 0;
+    m_nAnimControl = 0;
 
-	// ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‹æ•ª‚Ì‰Šú‰»(1 * 1)
-	m_nAnimColumnDiv = 1;
-	m_nAnimLineDiv = 1;
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®åŒºåˆ†ã®åˆæœŸåŒ–(1 * 1)
+    m_nAnimColumnDiv = 1;
+    m_nAnimLineDiv = 1;
 
-	LPDIRECT3DDEVICE9 pDevice = CApplication::GetRenderer()->GetDevice();
+    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();
 
-	// ’¸“_ƒoƒbƒtƒ@‚Ì¶¬
-	pDevice->CreateVertexBuffer(
-		sizeof(VERTEX_2D) * 4,
-		D3DUSAGE_WRITEONLY,
-		FVF_VERTEX_2D,
-		D3DPOOL_MANAGED,
-		&m_pVtxBuff,
-		NULL);
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
+    pDevice->CreateVertexBuffer(
+        sizeof(VERTEX_2D) * 4,
+        D3DUSAGE_WRITEONLY,
+        FVF_VERTEX_2D,
+        D3DPOOL_MANAGED,
+        &m_pVtxBuff,
+        NULL);
 
-	VERTEX_2D *pVtx;	//’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+    VERTEX_2D* pVtx;	//é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚µA’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğæ“¾
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã—ã€é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
+    m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	// ’¸“_ƒJƒ‰[‚Ìİ’è
-	pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+    // é ‚ç‚¹ã‚«ãƒ©ãƒ¼ã®è¨­å®š
+    pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+    pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+    pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+    pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 
-	pVtx[0].rhw = 1.0f;
-	pVtx[1].rhw = 1.0f;
-	pVtx[2].rhw = 1.0f;
-	pVtx[3].rhw = 1.0f;
+    pVtx[0].rhw = 1.0f;
+    pVtx[1].rhw = 1.0f;
+    pVtx[2].rhw = 1.0f;
+    pVtx[3].rhw = 1.0f;
 
-	// ƒeƒNƒXƒ`ƒƒÀ•W‚Ìİ’è
-	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
-	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
-	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã®è¨­å®š
+    pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
+    pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
+    pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
+    pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒAƒ“ƒƒbƒN‚·‚é
-	m_pVtxBuff->Unlock();
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¢ãƒ³ãƒ­ãƒƒã‚¯ã™ã‚‹
+    m_pVtxBuff->Unlock();
 
-	// ƒeƒNƒXƒ`ƒƒ‚Ì‰Šú‰»
-	SetTexture(CTexture::TEXTURE_NULL);
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®åˆæœŸåŒ–
+    SetTexture(CTexture::TEXTURE_NULL);
 
-	return S_OK;
+    return S_OK;
 }
 
 //=====================================
-// I—¹ˆ—
+// çµ‚äº†å‡¦ç†
 //=====================================
 void CObject_2D::Uninit()
 {
-	// ’¸“_ƒoƒbƒtƒ@‚Ì”jŠü
-	if (m_pVtxBuff != nullptr)
-	{
-		m_pVtxBuff->Release();
-		m_pVtxBuff = nullptr;
-	}
-	// ƒIƒuƒWƒFƒNƒg‚Ì”jŠü
-	Release();
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ç ´æ£„
+    if (m_pVtxBuff != nullptr)
+    {
+        m_pVtxBuff->Release();
+        m_pVtxBuff = nullptr;
+    }
+    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç ´æ£„
+    Release();
 }
 
 //=====================================
-// XVˆ—
+// æ›´æ–°å‡¦ç†
 //=====================================
 void CObject_2D::Update()
 {
@@ -116,247 +116,247 @@ void CObject_2D::Update()
 }
 
 //=====================================
-// •`‰æˆ—
+// æç”»å‡¦ç†
 //=====================================
 void CObject_2D::Draw()
 {
-	LPDIRECT3DDEVICE9 pDevice = CApplication::GetRenderer()->GetDevice();
+    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒf[ƒ^ƒXƒgƒŠ[ƒ€‚Éİ’è
-	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ‡ãƒ¼ã‚¿ã‚¹ãƒˆãƒªãƒ¼ãƒ ã«è¨­å®š
+    pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
 
-	// ’¸“_ƒtƒH[ƒ}ƒbƒg‚Ìİ’è
-	pDevice->SetFVF(FVF_VERTEX_2D);
+    // é ‚ç‚¹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è¨­å®š
+    pDevice->SetFVF(FVF_VERTEX_2D);
 
-	// ƒeƒNƒXƒ`ƒƒ‚Ìİ’è
-	CTexture::GetTextureType(m_textType);
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
+    CTexture::GetTextureType(m_textType);
 
-	// ƒ|ƒŠƒSƒ“‚Ì•`‰æ
-	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+    // ãƒãƒªã‚´ãƒ³ã®æç”»
+    pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-	// ƒeƒNƒXƒ`ƒƒ‚Ì‰ğ•úˆ—
-	CTexture::TextureClear();
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è§£æ”¾å‡¦ç†
+    CTexture::TextureClear();
 }
 
 //=====================================
-// UVİ’èˆ—
+// UVè¨­å®šå‡¦ç†
 //=====================================
 void CObject_2D::SetUV()
 {
-	VERTEX_2D *pVtx;	// ’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+    VERTEX_2D* pVtx;	// é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-						// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚µA’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğæ“¾
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã—ã€é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
+    m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	float fLength = sqrtf((powf(m_size.x, 2) + powf(m_size.y, 2)) / 2);
+    float fLength = sqrtf((powf(m_size.x, 2) + powf(m_size.y, 2)) / 2);
 
-	// ’¸“_î•ñ‚ğİ’è
-	pVtx[0].pos.x = m_pos.x - sinf(m_fAngle + m_rot.x) * fLength;
-	pVtx[0].pos.y = m_pos.y - cosf(m_fAngle + m_rot.y) * fLength;
-	pVtx[0].pos.z = m_pos.z;
+    // é ‚ç‚¹æƒ…å ±ã‚’è¨­å®š
+    pVtx[0].pos.x = m_pos.x - sinf(m_fAngle + m_rot.x) * fLength;
+    pVtx[0].pos.y = m_pos.y - cosf(m_fAngle + m_rot.y) * fLength;
+    pVtx[0].pos.z = m_pos.z;
 
-	pVtx[1].pos.x = m_pos.x + sinf(m_fAngle - m_rot.x) * fLength;
-	pVtx[1].pos.y = m_pos.y - cosf(m_fAngle - m_rot.y) * fLength;
-	pVtx[1].pos.z = m_pos.z;
+    pVtx[1].pos.x = m_pos.x + sinf(m_fAngle - m_rot.x) * fLength;
+    pVtx[1].pos.y = m_pos.y - cosf(m_fAngle - m_rot.y) * fLength;
+    pVtx[1].pos.z = m_pos.z;
 
-	pVtx[2].pos.x = m_pos.x - sinf(m_fAngle - m_rot.x) * fLength;
-	pVtx[2].pos.y = m_pos.y + cosf(m_fAngle - m_rot.y) * fLength;
-	pVtx[2].pos.z = m_pos.z;
+    pVtx[2].pos.x = m_pos.x - sinf(m_fAngle - m_rot.x) * fLength;
+    pVtx[2].pos.y = m_pos.y + cosf(m_fAngle - m_rot.y) * fLength;
+    pVtx[2].pos.z = m_pos.z;
 
-	pVtx[3].pos.x = m_pos.x + sinf(m_fAngle + m_rot.x) * fLength;
-	pVtx[3].pos.y = m_pos.y + cosf(m_fAngle + m_rot.y) * fLength;
-	pVtx[3].pos.z = m_pos.z;
+    pVtx[3].pos.x = m_pos.x + sinf(m_fAngle + m_rot.x) * fLength;
+    pVtx[3].pos.y = m_pos.y + cosf(m_fAngle + m_rot.y) * fLength;
+    pVtx[3].pos.z = m_pos.z;
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒAƒ“ƒƒbƒN‚·‚é
-	m_pVtxBuff->Unlock();
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¢ãƒ³ãƒ­ãƒƒã‚¯ã™ã‚‹
+    m_pVtxBuff->Unlock();
 }
 
 //=========================================================
-// ©“®“I‚È’¸“_ƒeƒNƒXƒ`ƒƒİ’èˆ—@(‰æ‘œ‘¬“x)
+// è‡ªå‹•çš„ãªé ‚ç‚¹ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šå‡¦ç†ã€€(ç”»åƒé€Ÿåº¦)
 //=========================================================
 void CObject_2D::SetAnimAuto(int nSpeed)
 {
-	VERTEX_2D *pVtx;	// ’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+    VERTEX_2D* pVtx;	// é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-						// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚µA’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğæ“¾
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã—ã€é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
+    m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	// ƒeƒNƒXƒ`ƒƒÀ•W‚Ìİ’è
-	pVtx[0].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * m_nAnimColumn,		(1.0f / m_nAnimLineDiv) * m_nAnimLine);
-	pVtx[1].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (m_nAnimColumn + 1),	(1.0f / m_nAnimLineDiv) * m_nAnimLine);
-	pVtx[2].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * m_nAnimColumn,		(1.0f / m_nAnimLineDiv) * (m_nAnimLine + 1));
-	pVtx[3].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (m_nAnimColumn + 1),	(1.0f / m_nAnimLineDiv) * (m_nAnimLine + 1));
-	
-	// ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì•b”‚ğ”‚¦‚é
-	m_nAnimControl++;
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã®è¨­å®š
+    pVtx[0].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * m_nAnimColumn, (1.0f / m_nAnimLineDiv) * m_nAnimLine);
+    pVtx[1].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (m_nAnimColumn + 1), (1.0f / m_nAnimLineDiv) * m_nAnimLine);
+    pVtx[2].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * m_nAnimColumn, (1.0f / m_nAnimLineDiv) * (m_nAnimLine + 1));
+    pVtx[3].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (m_nAnimColumn + 1), (1.0f / m_nAnimLineDiv) * (m_nAnimLine + 1));
 
-	// w’è‚Ì•b”‚ÅƒAƒjƒ[ƒVƒ‡ƒ“‚·‚éˆ—
-	if (nSpeed <= m_nAnimControl)
-	{
-		// ‚P—ñ‰¡‚ÉƒAƒjƒ[ƒVƒ‡ƒ“‚·‚é
-		m_nAnimColumn++;
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ç§’æ•°ã‚’æ•°ãˆã‚‹
+    m_nAnimControl++;
 
-		// ƒAƒjƒ[ƒVƒ‡ƒ“•b”‚Ì‰Šú‰»
-		m_nAnimControl = 0;
+    // æŒ‡å®šã®ç§’æ•°ã§ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã™ã‚‹å‡¦ç†
+    if (nSpeed <= m_nAnimControl)
+    {
+        // ï¼‘åˆ—æ¨ªã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã™ã‚‹
+        m_nAnimColumn++;
 
-		// —ñ‚ª‰¡‚ÌÅ‘å”‚ğ’´‚¦‚½ê‡
-		if (m_nAnimColumnDiv <= m_nAnimColumn)
-		{
-			// ¶’[‚É–ß‚·
-			m_nAnimColumn = 0;
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç§’æ•°ã®åˆæœŸåŒ–
+        m_nAnimControl = 0;
 
-			// ‚Psc‚ÉƒAƒjƒ[ƒVƒ‡ƒ“‚·‚é
-			m_nAnimLine++;
+        // åˆ—ãŒæ¨ªã®æœ€å¤§æ•°ã‚’è¶…ãˆãŸå ´åˆ
+        if (m_nAnimColumnDiv <= m_nAnimColumn)
+        {
+            // å·¦ç«¯ã«æˆ»ã™
+            m_nAnimColumn = 0;
 
-			// s‚ªc‚ÌÅ‘å”‚ğ’´‚¦‚½ê‡
-			if (m_nAnimLineDiv <= m_nAnimLine)
-			{
-				// ˆê”Ôã‚É–ß‚·
-				m_nAnimLine = 0;
-			}
-		}
-	}
+            // ï¼‘è¡Œç¸¦ã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã™ã‚‹
+            m_nAnimLine++;
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒAƒ“ƒƒbƒN‚·‚é
-	m_pVtxBuff->Unlock();
+            // è¡ŒãŒç¸¦ã®æœ€å¤§æ•°ã‚’è¶…ãˆãŸå ´åˆ
+            if (m_nAnimLineDiv <= m_nAnimLine)
+            {
+                // ä¸€ç•ªä¸Šã«æˆ»ã™
+                m_nAnimLine = 0;
+            }
+        }
+    }
+
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¢ãƒ³ãƒ­ãƒƒã‚¯ã™ã‚‹
+    m_pVtxBuff->Unlock();
 }
 
 //=========================================================
-// è“®—p‚Ì’¸“_ƒeƒNƒXƒ`ƒƒİ’èˆ—@(‰æ‘œ—ñ, ‰æ‘œs)
+// æ‰‹å‹•ç”¨ã®é ‚ç‚¹ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šå‡¦ç†ã€€(ç”»åƒåˆ—, ç”»åƒè¡Œ)
 //=========================================================
 void CObject_2D::SetAnimControl(int nAnimColumn, int nAnimLine)
 {
-	VERTEX_2D *pVtx;	// ’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+    VERTEX_2D* pVtx;	// é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-						// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚µA’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğæ“¾
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã—ã€é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
+    m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	// ƒeƒNƒXƒ`ƒƒÀ•W‚Ìİ’è
-	pVtx[0].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * nAnimColumn,			(1.0f / m_nAnimLineDiv) * nAnimLine);
-	pVtx[1].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (nAnimColumn + 1),	(1.0f / m_nAnimLineDiv) * nAnimLine);
-	pVtx[2].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * nAnimColumn,			(1.0f / m_nAnimLineDiv) * (nAnimLine + 1));
-	pVtx[3].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (nAnimColumn + 1),	(1.0f / m_nAnimLineDiv) * (nAnimLine + 1));
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã®è¨­å®š
+    pVtx[0].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * nAnimColumn, (1.0f / m_nAnimLineDiv) * nAnimLine);
+    pVtx[1].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (nAnimColumn + 1), (1.0f / m_nAnimLineDiv) * nAnimLine);
+    pVtx[2].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * nAnimColumn, (1.0f / m_nAnimLineDiv) * (nAnimLine + 1));
+    pVtx[3].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (nAnimColumn + 1), (1.0f / m_nAnimLineDiv) * (nAnimLine + 1));
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒAƒ“ƒƒbƒN‚·‚é
-	m_pVtxBuff->Unlock();
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¢ãƒ³ãƒ­ãƒƒã‚¯ã™ã‚‹
+    m_pVtxBuff->Unlock();
 }
 
 
 //=========================================================
-// è“®—p‚Ì’¸“_ƒeƒNƒXƒ`ƒƒİ’èˆ—@(‰æ‘œ”Ô†)
+// æ‰‹å‹•ç”¨ã®é ‚ç‚¹ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šå‡¦ç†ã€€(ç”»åƒç•ªå·)
 //=========================================================
 void CObject_2D::SetAnimControl(int nAnimCounter)
 {
-	VERTEX_2D *pVtx;	// ’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+    VERTEX_2D* pVtx;	// é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-						// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚µA’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğæ“¾
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã—ã€é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
+    m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	// w’è‚³‚ê‚½ƒAƒjƒ”Ô†‚ğ•Ï”‚ÉŠi”[‚·‚é
-	int nCounter = nAnimCounter;
+    // æŒ‡å®šã•ã‚ŒãŸã‚¢ãƒ‹ãƒ¡ç•ªå·ã‚’å¤‰æ•°ã«æ ¼ç´ã™ã‚‹
+    int nCounter = nAnimCounter;
 
-	// ‰¡‚ÌÅ‘å”‚ªw’è‚³‚ê‚½’l‚æ‚è‘å‚«‚¢ê‡ƒ‹[ƒv‚·‚é
-	while (m_nAnimColumnDiv <= nCounter)
-	{
-		// ’l‚ğ‹æ•ª”‚¾‚¯Œ¸‚ç‚·
-		nCounter -= m_nAnimColumnDiv;
+    // æ¨ªã®æœ€å¤§æ•°ãŒæŒ‡å®šã•ã‚ŒãŸå€¤ã‚ˆã‚Šå¤§ãã„å ´åˆãƒ«ãƒ¼ãƒ—ã™ã‚‹
+    while (m_nAnimColumnDiv <= nCounter)
+    {
+        // å€¤ã‚’åŒºåˆ†æ•°ã ã‘æ¸›ã‚‰ã™
+        nCounter -= m_nAnimColumnDiv;
 
-		// ‚Psc‚ÉƒAƒjƒ[ƒVƒ‡ƒ“‚·‚é
-		m_nAnimLine++;
+        // ï¼‘è¡Œç¸¦ã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã™ã‚‹
+        m_nAnimLine++;
 
-		// c‚ÌÅ‘å”‚ªw’è‚³‚ê‚½’l‚æ‚è‘å‚«‚¢ê‡
-		if (m_nAnimLine >= m_nAnimLineDiv)
-		{
-			// cƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‰Šú‰»
-			m_nAnimLine = 0;
-		}
-	}
+        // ç¸¦ã®æœ€å¤§æ•°ãŒæŒ‡å®šã•ã‚ŒãŸå€¤ã‚ˆã‚Šå¤§ãã„å ´åˆ
+        if (m_nAnimLine >= m_nAnimLineDiv)
+        {
+            // ç¸¦ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®åˆæœŸåŒ–
+            m_nAnimLine = 0;
+        }
+    }
 
-	// —ñƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‘ã“ü
-	m_nAnimColumn = nCounter;
+    // åˆ—ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ä»£å…¥
+    m_nAnimColumn = nCounter;
 
-	// ƒeƒNƒXƒ`ƒƒÀ•W‚Ìİ’è
-	pVtx[0].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * m_nAnimColumn,		(1.0f / m_nAnimLineDiv) * m_nAnimLine);
-	pVtx[1].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (m_nAnimColumn + 1),	(1.0f / m_nAnimLineDiv) * m_nAnimLine);
-	pVtx[2].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * m_nAnimColumn,		(1.0f / m_nAnimLineDiv) * (m_nAnimLine + 1));
-	pVtx[3].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (m_nAnimColumn + 1),	(1.0f / m_nAnimLineDiv) * (m_nAnimLine + 1));
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã®è¨­å®š
+    pVtx[0].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * m_nAnimColumn, (1.0f / m_nAnimLineDiv) * m_nAnimLine);
+    pVtx[1].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (m_nAnimColumn + 1), (1.0f / m_nAnimLineDiv) * m_nAnimLine);
+    pVtx[2].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * m_nAnimColumn, (1.0f / m_nAnimLineDiv) * (m_nAnimLine + 1));
+    pVtx[3].tex = D3DXVECTOR2((1.0f / m_nAnimColumnDiv) * (m_nAnimColumn + 1), (1.0f / m_nAnimLineDiv) * (m_nAnimLine + 1));
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒAƒ“ƒƒbƒN‚·‚é
-	m_pVtxBuff->Unlock();
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¢ãƒ³ãƒ­ãƒƒã‚¯ã™ã‚‹
+    m_pVtxBuff->Unlock();
 }
 
 //=====================================
-// Fİ’èˆ—(’¸“_•Ê)
+// è‰²è¨­å®šå‡¦ç†(é ‚ç‚¹åˆ¥)
 //=====================================
 void CObject_2D::SetColor(D3DXCOLOR col0, D3DXCOLOR col1, D3DXCOLOR col2, D3DXCOLOR col3)
 {
-	VERTEX_2D *pVtx;	// ’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+    VERTEX_2D* pVtx;	// é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-						// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚µA’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğæ“¾
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã—ã€é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
+    m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	pVtx[0].col = col0;
-	pVtx[1].col = col1;
-	pVtx[2].col = col2;
-	pVtx[3].col = col3;
+    pVtx[0].col = col0;
+    pVtx[1].col = col1;
+    pVtx[2].col = col2;
+    pVtx[3].col = col3;
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒAƒ“ƒƒbƒN‚·‚é
-	m_pVtxBuff->Unlock();
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¢ãƒ³ãƒ­ãƒƒã‚¯ã™ã‚‹
+    m_pVtxBuff->Unlock();
 }
 
 //=====================================
-// Fİ’èˆ—(‘S‘Ì)
+// è‰²è¨­å®šå‡¦ç†(å…¨ä½“)
 //=====================================
 void CObject_2D::SetColor(D3DXCOLOR col)
 {
-	VERTEX_2D *pVtx;	// ’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+    VERTEX_2D* pVtx;	// é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-						// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚µA’¸“_î•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğæ“¾
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã—ã€é ‚ç‚¹æƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
+    m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	pVtx[0].col = col;
-	pVtx[1].col = col;
-	pVtx[2].col = col;
-	pVtx[3].col = col;
+    pVtx[0].col = col;
+    pVtx[1].col = col;
+    pVtx[2].col = col;
+    pVtx[3].col = col;
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒAƒ“ƒƒbƒN‚·‚é
-	m_pVtxBuff->Unlock();
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¢ãƒ³ãƒ­ãƒƒã‚¯ã™ã‚‹
+    m_pVtxBuff->Unlock();
 }
 
 //=====================================
-// Šg‘å—Ê‚Ìİ’èˆ—
+// æ‹¡å¤§é‡ã®è¨­å®šå‡¦ç†
 //=====================================
 void CObject_2D::SetSize(const D3DXVECTOR2 size)
 {
-	m_size = size;
-	m_fAngle = atan2f(m_size.x, m_size.y);
+    m_size = size;
+    m_fAngle = atan2f(m_size.x, m_size.y);
 
-	SetUV();			// UV‚Ìİ’èˆ—
+    SetUV();			// UVã®è¨­å®šå‡¦ç†
 }
 
 //=====================================
-// ‰æ‘œƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‹æ•ªİ’èˆ—
+// ç”»åƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®åŒºåˆ†è¨­å®šå‡¦ç†
 //=====================================
 void CObject_2D::SetAnimDiv(int nDivX, int nDivY)
 {
-	m_nAnimColumnDiv = nDivX;
-	m_nAnimLineDiv = nDivY;
+    m_nAnimColumnDiv = nDivX;
+    m_nAnimLineDiv = nDivY;
 }
 
 //=====================================
-// ƒIƒuƒWƒFƒNƒg2D¶¬ˆ—
+// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ2Dç”Ÿæˆå‡¦ç†
 //=====================================
 CObject_2D* CObject_2D::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	CObject_2D* pObject2D = new CObject_2D;
+    CObject_2D* pObject2D = new CObject_2D;
 
-	if (FAILED(pObject2D->Init()))
-	{
-		return nullptr;
-	}
+    if (FAILED(pObject2D->Init()))
+    {
+        return nullptr;
+    }
 
-	pObject2D->SetPos(pos);
-	pObject2D->SetSize(size);
+    pObject2D->SetPos(pos);
+    pObject2D->SetSize(size);
 
-	return pObject2D;
+    return pObject2D;
 }

@@ -154,14 +154,11 @@
   <ItemGroup>
     <ClCompile Include="application.cpp" />
     <ClCompile Include="debugProc.cpp" />
+    <ClCompile Include="DirectInput.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="font.cpp" />
     <ClCompile Include="fontString.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="input.cpp" />
-    <ClCompile Include="inputKeyboard.cpp" />
-    <ClCompile Include="inputMouse.cpp" />
-    <ClCompile Include="inputPad.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mode.cpp" />
     <ClCompile Include="number.cpp" />
@@ -177,14 +174,12 @@
   <ItemGroup>
     <ClInclude Include="application.h" />
     <ClInclude Include="debugProc.h" />
+    <ClInclude Include="DirectInput.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="font.h" />
     <ClInclude Include="fontString.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="input.h" />
-    <ClInclude Include="inputKeyboard.h" />
-    <ClInclude Include="inputMouse.h" />
-    <ClInclude Include="inputPad.h" />
+    <ClInclude Include="InputInterface.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="mode.h" />
     <ClInclude Include="number.h" />

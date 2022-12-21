@@ -1,4 +1,4 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // debugProc.cpp
 // Author : Tanimoto Kosuke
@@ -13,7 +13,7 @@ LPD3DXFONT CDebugProc::m_pFont = nullptr;
 std::string CDebugProc::m_str = "";
 
 //=====================================
-// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CDebugProc::CDebugProc()
 {
@@ -21,7 +21,7 @@ CDebugProc::CDebugProc()
 }
 
 //=====================================
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CDebugProc::~CDebugProc()
 {
@@ -29,130 +29,130 @@ CDebugProc::~CDebugProc()
 }
 
 //============================================================================
-// ‰Šú‰»ˆ—
+// åˆæœŸåŒ–å‡¦ç†
 //============================================================================
 HRESULT CDebugProc::Init()
 {
-	//‰Šú‰»ˆ—
-	LPDIRECT3DDEVICE9 pDevice = CApplication::GetRenderer()->GetDevice();		//ƒfƒoƒCƒX‚Ìæ“¾
+    //åˆæœŸåŒ–å‡¦ç†
+    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();		//ãƒ‡ãƒã‚¤ã‚¹ã®å–å¾—
 
-	// ƒfƒoƒbƒOî•ñ•\¦—pƒtƒHƒ“ƒg‚Ì¶¬
-	D3DXCreateFont(pDevice, 18, 0, 0, 0, FALSE, SHIFTJIS_CHARSET,
-		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("Terminal"), &m_pFont);
+    // ãƒ‡ãƒãƒƒã‚°æƒ…å ±è¡¨ç¤ºç”¨ãƒ•ã‚©ãƒ³ãƒˆã®ç”Ÿæˆ
+    D3DXCreateFont(pDevice, 18, 0, 0, 0, FALSE, SHIFTJIS_CHARSET,
+        OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("Terminal"), &m_pFont);
 
-	return S_OK;
+    return S_OK;
 }
 
 //============================================================================
-// I—¹ˆ—
+// çµ‚äº†å‡¦ç†
 //============================================================================
 void CDebugProc::Uninit()
 {
-	//ƒtƒHƒ“ƒg‚Ì”jŠü
-	if (m_pFont != nullptr)
-	{
-		m_pFont->Release();
-		delete m_pFont;
-		m_pFont = nullptr;
-	}
+    //ãƒ•ã‚©ãƒ³ãƒˆã®ç ´æ£„
+    if (m_pFont != nullptr)
+    {
+        m_pFont->Release();
+        delete m_pFont;
+        m_pFont = nullptr;
+    }
 }
 
 //============================================================================
-// •¶š‚Ì“ü—Íˆ—
+// æ–‡å­—ã®å…¥åŠ›å‡¦ç†
 //============================================================================
-void CDebugProc::Print(const char *pFormat, ...)
+void CDebugProc::Print(const char* pFormat, ...)
 {
-	va_list args;
+    va_list args;
 
-	va_start(args, pFormat);
+    va_start(args, pFormat);
 
-	// •¶š—ñ‚ÌÅŒã‚Ü‚Å“Ç‚İ‚Şˆ—
-	for (const char* pPointer = pFormat; *pPointer != '\0'; pPointer++)
-	{
-		// %‚Å‚Í–³‚¢ê‡•¶š—ñ‚É’Ç‰Á‚·‚é
-		if (*pPointer != '%')
-		{
-			m_str += *pPointer;
-		}
-		else
-		{
-			pPointer++;	// ƒ|ƒCƒ“ƒ^‚ği‚ß‚é
+    // æ–‡å­—åˆ—ã®æœ€å¾Œã¾ã§èª­ã¿è¾¼ã‚€å‡¦ç†
+    for (const char* pPointer = pFormat; *pPointer != '\0'; pPointer++)
+    {
+        // %ã§ã¯ç„¡ã„å ´åˆæ–‡å­—åˆ—ã«è¿½åŠ ã™ã‚‹
+        if (*pPointer != '%')
+        {
+            m_str += *pPointer;
+        }
+        else
+        {
+            pPointer++;	// ãƒã‚¤ãƒ³ã‚¿ã‚’é€²ã‚ã‚‹
 
-			// Ÿ‚Ì•¶š‚Ìí—Ş‚ÅŒ^‚ğŒˆ‚ß‚éˆ—
-			switch (*pPointer)
-			{
+            // æ¬¡ã®æ–‡å­—ã®ç¨®é¡ã§å‹ã‚’æ±ºã‚ã‚‹å‡¦ç†
+            switch (*pPointer)
+            {
 
-			case 'd':
-			{
-				m_str += std::to_string(va_arg(args, int));
-			}
-			break;
+            case 'd':
+            {
+                m_str += std::to_string(va_arg(args, int));
+            }
+            break;
 
-			case 'f':
-			{
-				m_str += std::to_string(va_arg(args, double));
-			}
-			break;
+            case 'f':
+            {
+                m_str += std::to_string(va_arg(args, double));
+            }
+            break;
 
-			case 'c':
-			{
-				m_str += std::to_string(va_arg(args, char));
-			}
-			break;
+            case 'c':
+            {
+                m_str += std::to_string(va_arg(args, char));
+            }
+            break;
 
-			case 's':
-			{
-				m_str += va_arg(args, char*);
-			}
-			break;
+            case 's':
+            {
+                m_str += va_arg(args, char*);
+            }
+            break;
 
-			default:
-			{
-				m_str += '%';
-				m_str += *pPointer;
-			}
-			break;
+            default:
+            {
+                m_str += '%';
+                m_str += *pPointer;
+            }
+            break;
 
-			}
-		}
-	}
+            }
+        }
+    }
 
-	va_end(args);
+    va_end(args);
 }
 
 //============================================================================
-// •`‰æˆ—
+// æç”»å‡¦ç†
 //============================================================================
 void CDebugProc::Draw()
 {
-	RECT rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+    RECT rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
-	TCHAR str[Str_Max];
+    TCHAR str[Str_Max];
 
-	// •¶š—ñ‚ªÅ‘å•¶š”‚æ‚è­‚È‚¢ê‡‘±‚¯‚é
-	if (m_str.length() < Str_Max)
-	{
-		sprintf(str, _T(m_str.c_str()));
+    // æ–‡å­—åˆ—ãŒæœ€å¤§æ–‡å­—æ•°ã‚ˆã‚Šå°‘ãªã„å ´åˆç¶šã‘ã‚‹
+    if (m_str.length() < Str_Max)
+    {
+        sprintf(str, _T(m_str.c_str()));
 
-		// ƒeƒLƒXƒg•`‰æ
-		m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
-	}
+        // ãƒ†ã‚­ã‚¹ãƒˆæç”»
+        m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
+    }
 
-	m_str.clear();
+    m_str.clear();
 }
 
 //============================================================================
-// ¶¬ˆ—
+// ç”Ÿæˆå‡¦ç†
 //============================================================================
 CDebugProc* CDebugProc::Create()
 {
-	CDebugProc* pDebug = new CDebugProc;
+    CDebugProc* pDebug = new CDebugProc;
 
-	// ‰Šú‰»ˆ—
-	if (FAILED(pDebug->Init()))
-	{
-		return nullptr;
-	}
+    // åˆæœŸåŒ–å‡¦ç†
+    if (FAILED(pDebug->Init()))
+    {
+        return nullptr;
+    }
 
-	return pDebug;
+    return pDebug;
 }

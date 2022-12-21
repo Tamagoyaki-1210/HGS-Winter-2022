@@ -58,18 +58,6 @@
     <ClCompile Include="fontString.cpp">
       <Filter>プログラムファイル\03_Object\Object2D\Font</Filter>
     </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>プログラムファイル\02_Input</Filter>
-    </ClCompile>
-    <ClCompile Include="inputKeyboard.cpp">
-      <Filter>プログラムファイル\02_Input</Filter>
-    </ClCompile>
-    <ClCompile Include="inputMouse.cpp">
-      <Filter>プログラムファイル\02_Input</Filter>
-    </ClCompile>
-    <ClCompile Include="inputPad.cpp">
-      <Filter>プログラムファイル\02_Input</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>プログラムファイル\00_Basis</Filter>
     </ClCompile>
@@ -93,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="texture.cpp">
       <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectInput.cpp">
+      <Filter>プログラムファイル\02_Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,18 +111,6 @@
     <ClInclude Include="object.h">
       <Filter>プログラムファイル\03_Object</Filter>
     </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>プログラムファイル\02_Input</Filter>
-    </ClInclude>
-    <ClInclude Include="inputKeyboard.h">
-      <Filter>プログラムファイル\02_Input</Filter>
-    </ClInclude>
-    <ClInclude Include="inputMouse.h">
-      <Filter>プログラムファイル\02_Input</Filter>
-    </ClInclude>
-    <ClInclude Include="inputPad.h">
-      <Filter>プログラムファイル\02_Input</Filter>
-    </ClInclude>
     <ClInclude Include="main.h">
       <Filter>プログラムファイル\00_Basis</Filter>
     </ClInclude>
@@ -158,6 +137,12 @@
     </ClInclude>
     <ClInclude Include="texture.h">
       <Filter>プログラムファイル\00_Basis</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectInput.h">
+      <Filter>プログラムファイル\02_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputInterface.h">
+      <Filter>プログラムファイル\02_Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
