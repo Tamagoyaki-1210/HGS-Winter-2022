@@ -32,7 +32,7 @@ CGame::~CGame()
 //=====================================
 HRESULT CGame::Init()
 {
-    g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_BGM_GAME);
+	CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_BGM_GAME);
 
     CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100, 100));
 
@@ -68,9 +68,9 @@ void CGame::Input()
     //    g_pApplication->SetMode(g_pApplication->Mode_Result);
     //}
 
-    if (g_pApplication->GetInput()->KeyDown(DIK_RETURN, true))
+    if (CApplication::GetInstance()->GetInput()->KeyDown(DIK_RETURN, true))
     {
-        g_pApplication->SetMode(g_pApplication->Mode_Result);
+		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
     }
 }
 

@@ -163,7 +163,7 @@ void CRenderer::Draw()
         // オブジェクトの描画処理
         CObject::DrawAll();
 
-        CFade* pFade = g_pApplication->GetFade();
+        CFade* pFade = CApplication::GetInstance()->GetFade();
         if (pFade != nullptr)
         {
             // フェードが読み込まれていない場合
@@ -176,7 +176,7 @@ void CRenderer::Draw()
         // FPS表示
         DrawFPS();
         // デバッグフォントの描画処理
-        CDebugProc::Draw();
+		CApplication::GetInstance()->GetDebugProc()->Draw();
 #endif // _DEBUG
         // Direct3Dによる描画の終了
         m_pD3DDevice->EndScene();

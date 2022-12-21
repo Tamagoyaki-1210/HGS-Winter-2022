@@ -50,7 +50,7 @@ HRESULT CObject_2D::Init()
     m_nAnimColumnDiv = 1;
     m_nAnimLineDiv = 1;
 
-    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();
+    LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
 
     // 頂点バッファの生成
     pDevice->CreateVertexBuffer(
@@ -120,7 +120,7 @@ void CObject_2D::Update()
 //=====================================
 void CObject_2D::Draw()
 {
-    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();
+    LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
 
     // 頂点バッファをデータストリームに設定
     pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));

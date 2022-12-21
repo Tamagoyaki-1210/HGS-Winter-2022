@@ -48,8 +48,6 @@ int g_nCountFPS;
 //--------------------------------
 static bool s_bExit;
 
-CApplication* g_pApplication = nullptr;
-
 //=============================================================================
 // メイン関数
 //=============================================================================
@@ -92,10 +90,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE/* hPrevInstance*/, LPSTR /*lpC
         NULL);
 
     // アプリケーションの生成
-    g_pApplication = new CApplication;
+    CApplication* pApplication = CApplication::GetInstance();
 
-
-    if (FAILED(g_pApplication->Init(hInstance, hWnd)))
+    if (FAILED(pApplication->Init(hInstance, hWnd)))
     {
         return -1;
     }
@@ -151,13 +148,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE/* hPrevInstance*/, LPSTR /*lpC
               // 現在の時間を保存
                 dwExecLastTime = dwCurrentTime;
 
-                if (g_pApplication != nullptr)
+                if (pApplication != nullptr)
                 {
                     // 更新処理
-                    g_pApplication->Update();
+					pApplication->Update();
 
                     // 描画処理
-                    g_pApplication->Draw();
+					pApplication->Draw();
                 }
 
 #ifdef _DEBUG
@@ -171,11 +168,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE/* hPrevInstance*/, LPSTR /*lpC
         }
     }
 
-    if (g_pApplication != nullptr)
+    if (pApplication != nullptr)
     {
-        g_pApplication->Uninit();
-        delete g_pApplication;
-        g_pApplication = nullptr;
+		pApplication->Uninit();
+		pApplication = nullptr;
     }
 
     // ウィンドウクラスの登録を解除
