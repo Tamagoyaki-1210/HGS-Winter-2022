@@ -27,7 +27,7 @@ public:
     virtual long GetMouseWheelPos() = 0;
 
     virtual bool ControllerButtonUp(size_t button, size_t user = 0) = 0;
-    virtual bool ControllerButtonDown(size_t button, size_t user = 0, bool trigger = false) = 0;
+    virtual bool ControllerButtonDown(size_t button, bool trigger = false, size_t user = 0) = 0;
     virtual POINT GetLeftStickPos(size_t user = 0) = 0;
     virtual POINT GetRightStickPos(size_t user = 0) = 0;
     virtual bool GetControllerIsUse(size_t user = 0) = 0;

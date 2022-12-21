@@ -157,7 +157,7 @@ public:
 
     // Game controller functions.
     bool ControllerButtonUp(size_t button, size_t user = 0) override;
-    bool ControllerButtonDown(size_t button, size_t user = 0, bool trigger = false) override;
+    bool ControllerButtonDown(size_t button, bool trigger = false, size_t user = 0) override;
 
     // Get controller main (left) and right stick position.
     POINT GetLeftStickPos(size_t user = 0) override;

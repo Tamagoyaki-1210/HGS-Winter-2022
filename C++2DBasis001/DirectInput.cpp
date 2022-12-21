@@ -406,7 +406,7 @@ bool CDirectInputSystem::ControllerButtonUp(size_t button, size_t user)
     return m_gameController->ButtonUp(button, user);
 }
 
-bool CDirectInputSystem::ControllerButtonDown(size_t button, size_t user, bool trigger)
+bool CDirectInputSystem::ControllerButtonDown(size_t button, bool trigger, size_t user)
 {
     if (!m_gameController) return false;
     return m_gameController->ButtonDown(button, user, trigger);
