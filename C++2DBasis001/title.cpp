@@ -1,4 +1,4 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // title.cpp
 // Author : Tanimoto Kosuke
@@ -8,12 +8,11 @@
 #include "application.h"
 #include "object2D.h"
 #include "fontString.h"
-#include "inputKeyboard.h"
-#include "inputMouse.h"
+#include "DirectInput.h"
 #include "score.h"
 
 //=====================================
-// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CTitle::CTitle()
 {
@@ -21,7 +20,7 @@ CTitle::CTitle()
 }
 
 //=====================================
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CTitle::~CTitle()
 {
@@ -29,31 +28,31 @@ CTitle::~CTitle()
 }
 
 //=====================================
-// ‰Šú‰»ˆ—
+// åˆæœŸåŒ–å‡¦ç†
 //=====================================
 HRESULT CTitle::Init()
 {
-	CApplication::GetSound()->Play(CSound::SOUND_LABEL_BGM_TITLE);
-	
-	CObject_2D* pObj2D = nullptr;
+    g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_BGM_TITLE);
 
-	pObj2D = CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100.0f, 100.0f));
-	pObj2D->SetTexture((CTexture::Texture_Type)0);
-	m_pvObj2D.push_back(pObj2D);
+    CObject_2D* pObj2D = nullptr;
 
-	pObj2D = CObject_2D::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100.0f, 100.0f));
-	m_pvObj2D.push_back(pObj2D);
+    pObj2D = CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100.0f, 100.0f));
+    pObj2D->SetTexture((CTexture::Texture_Type)0);
+    m_pvObj2D.push_back(pObj2D);
 
-	CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80.0f, 80.0f), "ƒ^ƒCƒgƒ‹");
+    pObj2D = CObject_2D::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100.0f, 100.0f));
+    m_pvObj2D.push_back(pObj2D);
 
-	CScore* pScore = CScore::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 12, 0.0f), D3DXVECTOR2(10.0f, 20.0f));
-	pScore->AddScore(12345609);
+    CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80.0f, 80.0f), "ã‚¿ã‚¤ãƒˆãƒ«");
 
-	return S_OK;
+    CScore* pScore = CScore::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 12, 0.0f), D3DXVECTOR2(10.0f, 20.0f));
+    pScore->AddScore(12345609);
+
+    return S_OK;
 }
 
 //=====================================
-// I—¹ˆ—
+// çµ‚äº†å‡¦ç†
 //=====================================
 void CTitle::Uninit()
 {
@@ -61,72 +60,76 @@ void CTitle::Uninit()
 }
 
 //=====================================
-// XVˆ—
+// æ›´æ–°å‡¦ç†
 //=====================================
 void CTitle::Update()
 {
-	Input();
+    Input();
 }
 
 //=====================================
-// “ü—Íˆ—
+// å…¥åŠ›å‡¦ç†
 //=====================================
 void CTitle::Input()
 {
-	// ƒ‚[ƒhØ‚è‘Ö‚¦
-	if (CInputKeyboard::GetKeyboardTrigger(DIK_RETURN))
-	{
-		CApplication::GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
-		CApplication::SetMode(CApplication::Mode_Game);
-	}
+    const auto p_Input = g_pApplication->GetInput();
 
-	POINT pt = CInputMouse::GetPoint();
+    // ãƒ¢ãƒ¼ãƒ‰åˆ‡ã‚Šæ›¿ãˆ
+    if (p_Input->KeyDown(DIK_RETURN, true))
+    {
+        g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
+        g_pApplication->SetMode(g_pApplication->Mode_Game);
+    }
 
-	D3DXVECTOR3 MousePos = Vec3Null;
-	MousePos.x = (float)pt.x;
-	MousePos.y = (float)pt.y;
+    const POINT pt = p_Input->GetMousePos();
 
-	// ˆÊ’uŒvZ—pƒ}ƒgƒŠƒNƒX
-	D3DXVECTOR3 ObjPos;
-	D3DXVECTOR2 ObjSize;
+    D3DXVECTOR3 MousePos = Vec3Null;
+    MousePos.x = (float)pt.x;
+    MousePos.y = (float)pt.y;
 
-	float fLeft, fRight, fTop, fBottom;
+    // ä½ç½®è¨ˆç®—ç”¨ãƒãƒˆãƒªã‚¯ã‚¹
+    D3DXVECTOR3 ObjPos;
+    D3DXVECTOR2 ObjSize;
 
-	// 2DƒIƒuƒWƒFƒNƒg–ˆ‚Ì‘å‚«‚³‚ğ‹‚ß‚éˆ—
-	for (int nCnt = 0; nCnt < (int)m_pvObj2D.size(); nCnt++)
-	{
-		ObjPos = m_pvObj2D[nCnt]->GetPos();
-		ObjSize = m_pvObj2D[nCnt]->GetSize();
+    float fLeft, fRight, fTop, fBottom;
 
-		fLeft = ObjPos.x - ObjSize.x;
-		fRight = ObjPos.x + ObjSize.x;
-		fTop = ObjPos.y - ObjSize.y;
-		fBottom = ObjPos.y + ObjSize.y;
+    // 2Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ¯ã®å¤§ãã•ã‚’æ±‚ã‚ã‚‹å‡¦ç†
+    for (int nCnt = 0; nCnt < (int)m_pvObj2D.size(); nCnt++)
+    {
+        ObjPos = m_pvObj2D[nCnt]->GetPos();
+        ObjSize = m_pvObj2D[nCnt]->GetSize();
 
-		// ƒIƒuƒWƒFƒNƒg‚Æƒ}ƒEƒX‚ªd‚È‚Á‚Ä‚¢‚éê‡
-		if (MousePos.x > fLeft && MousePos.x < fRight && MousePos.y > fTop&& MousePos.y < fBottom)
-		{
-			// ¶ƒ{ƒ^ƒ“‚ğ˜b‚µ‚½‚ÉˆÚ“®
-			if (CInputMouse::OnMouseUp(CInputMouse::MOUSE_LEFT))
-			{
-				CApplication::GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
-				CApplication::SetMode(CApplication::Mode_Game);
-			}
-		}
-	}
+        fLeft = ObjPos.x - ObjSize.x;
+        fRight = ObjPos.x + ObjSize.x;
+        fTop = ObjPos.y - ObjSize.y;
+        fBottom = ObjPos.y + ObjSize.y;
+
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ãƒã‚¦ã‚¹ãŒé‡ãªã£ã¦ã„ã‚‹å ´åˆ
+        if (MousePos.x > fLeft && MousePos.x < fRight && MousePos.y > fTop && MousePos.y < fBottom)
+        {
+            // å·¦ãƒœã‚¿ãƒ³ã‚’è©±ã—ãŸæ™‚ã«ç§»å‹•
+            if (p_Input->MouseButtonDown(MOUSE_LEFT_BUTTON, true))
+            {
+                g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
+                g_pApplication->SetMode(g_pApplication->Mode_Game);
+            }
+        }
+    }
+
+    p_Input->SetMoterSpeed(10000, 5000);
 }
 
 //=====================================
-// ¶¬ˆ—
+// ç”Ÿæˆå‡¦ç†
 //=====================================
 CTitle* CTitle::Create()
 {
-	CTitle* pTitle = new CTitle;
+    CTitle* pTitle = new CTitle;
 
-	if (FAILED(pTitle->Init()))
-	{
-		return nullptr;
-	}
+    if (FAILED(pTitle->Init()))
+    {
+        return nullptr;
+    }
 
-	return pTitle;
+    return pTitle;
 }

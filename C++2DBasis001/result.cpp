@@ -1,4 +1,4 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // result.cpp
 // Author : Tanimoto Kosuke
@@ -8,10 +8,9 @@
 #include "application.h"
 #include "object2D.h"
 #include "fontString.h"
-#include "inputKeyboard.h"
-
+#include "DirectInput.h"
 //=====================================
-// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CResult::CResult()
 {
@@ -19,7 +18,7 @@ CResult::CResult()
 }
 
 //=====================================
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CResult::~CResult()
 {
@@ -27,21 +26,21 @@ CResult::~CResult()
 }
 
 //=====================================
-// ‰Šú‰»ˆ—
+// åˆæœŸåŒ–å‡¦ç†
 //=====================================
 HRESULT CResult::Init()
 {
-	CApplication::GetSound()->Play(CSound::SOUND_LABEL_BGM_RESULT);
+    g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_BGM_RESULT);
 
-	CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100, 100));
+    CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100, 100));
 
-	CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ƒŠƒUƒ‹ƒg");
+    CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ãƒªã‚¶ãƒ«ãƒˆ");
 
-	return S_OK;
+    return S_OK;
 }
 
 //=====================================
-// I—¹ˆ—
+// çµ‚äº†å‡¦ç†
 //=====================================
 void CResult::Uninit()
 {
@@ -49,36 +48,37 @@ void CResult::Uninit()
 }
 
 //=====================================
-// XVˆ—
+// æ›´æ–°å‡¦ç†
 //=====================================
 void CResult::Update()
 {
-	Input();
+    Input();
 }
 
 //=====================================
-// “ü—Íˆ—
+// å…¥åŠ›å‡¦ç†
 //=====================================
 void CResult::Input()
 {
-	// ƒ‚[ƒhØ‚è‘Ö‚¦
-	if (CInputKeyboard::GetKeyboardTrigger(DIK_RETURN))
-	{
-		CApplication::SetMode(CApplication::Mode_Title);
-	}
+    // ãƒ¢ãƒ¼ãƒ‰åˆ‡ã‚Šæ›¿ãˆ
+
+    if (g_pApplication->GetInput()->KeyDown(DIK_RETURN, true))
+    {
+        g_pApplication->SetMode(g_pApplication->Mode_Title);
+    }
 }
 
 //=====================================
-// ¶¬ˆ—
+// ç”Ÿæˆå‡¦ç†
 //=====================================
 CResult* CResult::Create()
 {
-	CResult* pResult = new CResult;
+    CResult* pResult = new CResult;
 
-	if (FAILED(pResult->Init()))
-	{
-		return nullptr;
-	}
+    if (FAILED(pResult->Init()))
+    {
+        return nullptr;
+    }
 
-	return pResult;
+    return pResult;
 }

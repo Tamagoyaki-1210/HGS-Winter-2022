@@ -1,4 +1,4 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // application.cpp
 // Author : Tanimoto Kosuke
@@ -6,9 +6,6 @@
 //=============================================================================
 #include "application.h"
 #include "renderer.h"
-#include "inputKeyboard.h"
-#include "inputMouse.h"
-#include "inputPad.h"
 #include "texture.h"
 #include "fade.h"
 #include "mode.h"
@@ -17,20 +14,21 @@
 #include "title.h"
 #include "game.h"
 #include "result.h"
-
-CRenderer *CApplication::m_pRenderer = nullptr;	// ƒŒƒ“ƒ_ƒ‰[ƒ|ƒCƒ“ƒ^
-CInput *CApplication::m_pInput[Input_Max] = {};	// “ü—Íƒ|ƒCƒ“ƒ^
-CTexture *CApplication::m_pTexture = nullptr;	// ‰æ‘œƒ|ƒCƒ“ƒ^
-CMode *CApplication::m_pMode = nullptr;			// ƒ‚[ƒhƒ|ƒCƒ“ƒ^
-CSound *CApplication::m_pSound = nullptr;		// ƒTƒEƒ“ƒhƒ|ƒCƒ“ƒ^
-CFade* CApplication::m_pFade = nullptr;			// ƒtƒF[ƒhƒ|ƒCƒ“ƒ^
-CDebugProc* CApplication::m_pDebug = nullptr;	// ƒfƒoƒbƒOƒ|ƒCƒ“ƒ^
-
-CApplication::Mode CApplication::m_mode = CApplication::Mode_Title;			//ƒ‚[ƒh
-CApplication::Mode CApplication::m_modeNext = CApplication::Mode_Title;		//Ÿ‚Ìƒ‚[ƒh
+#include "DirectInput.h"
+//
+//CRenderer *CApplication::m_pRenderer = nullptr;	// ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ãƒã‚¤ãƒ³ã‚¿
+////CInput *CApplication::m_pInput[Input_Max] = {};	// å…¥åŠ›ãƒã‚¤ãƒ³ã‚¿
+//CTexture *CApplication::m_pTexture = nullptr;	// ç”»åƒãƒã‚¤ãƒ³ã‚¿
+//CMode *CApplication::m_pMode = nullptr;			// ãƒ¢ãƒ¼ãƒ‰ãƒã‚¤ãƒ³ã‚¿
+//CSound *CApplication::m_pSound = nullptr;		// ã‚µã‚¦ãƒ³ãƒ‰ãƒã‚¤ãƒ³ã‚¿
+//CFade* CApplication::m_pFade = nullptr;			// ãƒ•ã‚§ãƒ¼ãƒ‰ãƒã‚¤ãƒ³ã‚¿
+//CDebugProc* CApplication::m_pDebug = nullptr;	// ãƒ‡ãƒãƒƒã‚°ãƒã‚¤ãƒ³ã‚¿
+//
+//CApplication::Mode CApplication::m_mode = CApplication::Mode_Title;			//ãƒ¢ãƒ¼ãƒ‰
+//CApplication::Mode CApplication::m_modeNext = CApplication::Mode_Title;		//æ¬¡ã®ãƒ¢ãƒ¼ãƒ‰
 
 //=====================================
-// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CApplication::CApplication()
 {
@@ -38,7 +36,7 @@ CApplication::CApplication()
 }
 
 //=====================================
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CApplication::~CApplication()
 {
@@ -46,260 +44,269 @@ CApplication::~CApplication()
 }
 
 //=====================================
-// ‰Šú‰»ˆ—
+// åˆæœŸåŒ–å‡¦ç†
 //=====================================
 HRESULT CApplication::Init(HINSTANCE hInstance, HWND hWnd)
 {
-	if (m_pRenderer == nullptr)
-	{
-		m_pRenderer = new CRenderer;
-	}
+    if (m_pRenderer == nullptr)
+    {
+        m_pRenderer = new CRenderer;
+    }
 
-	// true : ƒEƒBƒ“ƒhƒEƒTƒCƒY, false : ‘S‰æ–Ê
-	if (FAILED(m_pRenderer->Init(hWnd, true)))
-	{
-		return -1;
-	}
+    // true : ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚º, false : å…¨ç”»é¢
+    if (FAILED(m_pRenderer->Init(hWnd, true)))
+    {
+        return -1;
+    }
 
-	if (m_pTexture == nullptr)
-	{
-		m_pTexture = new CTexture;
-		
-		//‘S‚Ä‚Ì‰æ‘œ‚Ì“Ç‚İ‚İˆ—
-		m_pTexture->LoadAll();
-	}
+    if (m_pTexture == nullptr)
+    {
+        m_pTexture = new CTexture;
 
-	if (m_pDebug == nullptr)
-	{
-		m_pDebug = CDebugProc::Create();
-	}
+        //å…¨ã¦ã®ç”»åƒã®èª­ã¿è¾¼ã¿å‡¦ç†
+        m_pTexture->LoadAll();
+    }
 
-	if (m_pSound == nullptr)
-	{
-		m_pSound = CSound::Create(hWnd);
-	}
+    if (m_pDebug == nullptr)
+    {
+        m_pDebug = CDebugProc::Create();
+    }
 
-	if (m_pMode == nullptr)
-	{
-		// Å‰‚Ìƒ‚[ƒh
-		m_pMode = CTitle::Create();
-		m_mode = Mode_Title;
-		m_modeNext = Mode_Title;
-	}
+    if (m_pSound == nullptr)
+    {
+        m_pSound = CSound::Create(hWnd);
+    }
 
-	if (m_pFade == nullptr)
-	{
-		// ƒtƒF[ƒh¶¬
-		m_pFade = CFade::Create();
-		m_pFade->SetFade();
-	}
+    if (m_pMode == nullptr)
+    {
+        // æœ€åˆã®ãƒ¢ãƒ¼ãƒ‰
+        m_pMode = CTitle::Create();
+        m_mode = Mode_Title;
+        m_modeNext = Mode_Title;
+    }
 
-	// ƒCƒ“ƒvƒbƒgƒfƒoƒCƒX‚Ì¶¬
-	for (int nCnt = 0; nCnt < Input_Max; nCnt++)
-	{
-		if (m_pInput[nCnt] == nullptr)
-		{
-			// í•Ê–ˆ‚Ìİ’è
-			switch ((Input_type)nCnt)
-			{
-			case CApplication::Input_Keyboard:
-				// ƒL[ƒ{[ƒhƒCƒ“ƒXƒ^ƒ“ƒX‚Ì¶¬
-				m_pInput[nCnt] = new CInputKeyboard;
-				break;
+    if (m_pFade == nullptr)
+    {
+        // ãƒ•ã‚§ãƒ¼ãƒ‰ç”Ÿæˆ
+        m_pFade = CFade::Create();
+        m_pFade->SetFade();
+    }
 
-			case CApplication::Input_Pad:
-				// ƒpƒbƒhƒCƒ“ƒXƒ^ƒ“ƒX‚Ì¶¬
-				m_pInput[nCnt] = new CInputPad;
-				break;
 
-			case CApplication::Input_Mouse:
-				// ƒ}ƒEƒXƒCƒ“ƒXƒ^ƒ“ƒX‚Ì¶¬
-				m_pInput[nCnt] = new CInputMouse;
-				break;
+    if (!CreateDIInput(&m_pInput, hWnd, hInstance, false))
+    {
+        return -1;
+    }
 
-			default:
-				break;
-			}
+    //// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ‡ãƒã‚¤ã‚¹ã®ç”Ÿæˆ
+    //for (int nCnt = 0; nCnt < Input_Max; nCnt++)
+    //{
+    //	if (m_pInput[nCnt] == nullptr)
+    //	{
+    //		// ç¨®åˆ¥æ¯ã®è¨­å®š
+    //		switch ((Input_type)nCnt)
+    //		{
+    //		case CApplication::Input_Keyboard:
+    //			// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ç”Ÿæˆ
+    //			m_pInput[nCnt] = new CInputKeyboard;
+    //			break;
 
-			// ƒCƒ“ƒvƒbƒgƒfƒoƒCƒX‚Ì‰Šú‰»ˆ—
-			if (FAILED(m_pInput[nCnt]->Init(hInstance, hWnd)))
-			{
-				return -1;
-			}
-		}
-	}
+    //		case CApplication::Input_Pad:
+    //			// ãƒ‘ãƒƒãƒ‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ç”Ÿæˆ
+    //			m_pInput[nCnt] = new CInputPad;
+    //			break;
 
-	return S_OK;
+    //		case CApplication::Input_Mouse:
+    //			// ãƒã‚¦ã‚¹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ç”Ÿæˆ
+    //			m_pInput[nCnt] = new CInputMouse;
+    //			break;
+
+    //		default:
+    //			break;
+    //		}
+
+    //		// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ‡ãƒã‚¤ã‚¹ã®åˆæœŸåŒ–å‡¦ç†
+    //		if (FAILED(m_pInput[nCnt]->Init(hInstance, hWnd)))
+    //		{
+    //			return -1;
+    //		}
+    //	}
+    //}
+
+
+    return S_OK;
 }
 
 //=====================================
-// I—¹ˆ—
+// çµ‚äº†å‡¦ç†
 //=====================================
 void CApplication::Uninit()
 {
-	// ƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ì”jŠü
-	if (m_pRenderer != nullptr)
-	{
-		m_pRenderer->Uninit();
-		delete m_pRenderer;
-		m_pRenderer = nullptr;
-	}
+    // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®ç ´æ£„
+    if (m_pRenderer != nullptr)
+    {
+        m_pRenderer->Uninit();
+        delete m_pRenderer;
+        m_pRenderer = nullptr;
+    }
 
-	// ƒ‚[ƒh‚Ì”jŠü
-	if (m_pMode != nullptr)
-	{
-		m_pMode->Uninit();
-		delete m_pMode;
-		m_pMode = nullptr;
-	}
+    // ãƒ¢ãƒ¼ãƒ‰ã®ç ´æ£„
+    if (m_pMode != nullptr)
+    {
+        m_pMode->Uninit();
+        delete m_pMode;
+        m_pMode = nullptr;
+    }
 
-	// ƒCƒ“ƒvƒbƒgƒfƒoƒCƒX‚Ì”jŠü
-	for (int nCnt = 0; nCnt < Input_Max; nCnt++)
-	{
-		if (m_pInput[nCnt] != nullptr)
-		{
-			m_pInput[nCnt]->Uninit();
-			delete m_pInput[nCnt];
-			m_pInput[nCnt] = nullptr;
-		}
-	}
+    //// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ‡ãƒã‚¤ã‚¹ã®ç ´æ£„
+    //for (int nCnt = 0; nCnt < Input_Max; nCnt++)
+    //{
+    //	if (m_pInput[nCnt] != nullptr)
+    //	{
+    //		m_pInput[nCnt]->Uninit();
+    //		delete m_pInput[nCnt];
+    //		m_pInput[nCnt] = nullptr;
+    //	}
+    //}
+    m_pInput->Shutdown();
 
-	// ƒTƒEƒ“ƒh‚Ì”jŠü
-	if (m_pSound != nullptr)
-	{
-		m_pSound->Uninit();
-		delete m_pSound;
-		m_pSound = nullptr;
-	}
+    // ã‚µã‚¦ãƒ³ãƒ‰ã®ç ´æ£„
+    if (m_pSound != nullptr)
+    {
+        m_pSound->Uninit();
+        delete m_pSound;
+        m_pSound = nullptr;
+    }
 
-	//ƒtƒF[ƒh‚Ì”jŠü
-	if (m_pFade != nullptr)
-	{
-		m_pFade->Uninit();
-		delete m_pFade;
-		m_pFade = nullptr;
-	}
+    //ãƒ•ã‚§ãƒ¼ãƒ‰ã®ç ´æ£„
+    if (m_pFade != nullptr)
+    {
+        m_pFade->Uninit();
+        delete m_pFade;
+        m_pFade = nullptr;
+    }
 
-	// ƒfƒoƒbƒOƒeƒLƒXƒg‚Ì”jŠü
-	if (m_pDebug != nullptr)
-	{
-		delete m_pDebug;
-		m_pDebug = nullptr;
-	}
+    // ãƒ‡ãƒãƒƒã‚°ãƒ†ã‚­ã‚¹ãƒˆã®ç ´æ£„
+    if (m_pDebug != nullptr)
+    {
+        delete m_pDebug;
+        m_pDebug = nullptr;
+    }
 
-	// ƒIƒuƒWƒFƒNƒg‘S‘Ì‚ÌI—¹
-	CObject::ReleaseAll();
+    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®çµ‚äº†
+    CObject::ReleaseAll();
 
-	// ‰æ‘œ‚Ì”jŠü
-	if (m_pTexture != nullptr)
-	{
-		m_pTexture->ReleaseAll();
-		delete m_pTexture;
-		m_pTexture = nullptr;
-	}
+    // ç”»åƒã®ç ´æ£„
+    if (m_pTexture != nullptr)
+    {
+        m_pTexture->ReleaseAll();
+        delete m_pTexture;
+        m_pTexture = nullptr;
+    }
 }
 
 //=====================================
-// XVˆ—
+// æ›´æ–°å‡¦ç†
 //=====================================
 void CApplication::Update()
 {
-	// ƒCƒ“ƒvƒbƒgƒfƒoƒCƒX‚ÌXVˆ—
-	for (int nCnt = 0; nCnt < Input_Max; nCnt++)
-	{
-		if (m_pInput[nCnt] != nullptr)
-		{
-			m_pInput[nCnt]->Update();
-		}
-	}
+    //// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ‡ãƒã‚¤ã‚¹ã®æ›´æ–°å‡¦ç†
+    //for (int nCnt = 0; nCnt < Input_Max; nCnt++)
+    //{
+    //	if (m_pInput[nCnt] != nullptr)
+    //	{
+    //		m_pInput[nCnt]->Update();
+    //	}
+    //}
+    m_pInput->UpdateDevices();
 
-	if (m_pRenderer != nullptr)
-	{
-		m_pRenderer->Update();
-	}
+    if (m_pRenderer != nullptr)
+    {
+        m_pRenderer->Update();
+    }
 
-	// ƒtƒF[ƒh‚ÌXVˆ—
-	if (m_pFade != nullptr)
-	{
-		// ƒtƒF[ƒh‚ª“Ç‚İ‚Ü‚ê‚Ä‚¢‚È‚¢ê‡
-		if (m_pFade->GetFade() != CFade::FADE_NONE)
-		{
-			m_pFade->Update();
+    // ãƒ•ã‚§ãƒ¼ãƒ‰ã®æ›´æ–°å‡¦ç†
+    if (m_pFade != nullptr)
+    {
+        // ãƒ•ã‚§ãƒ¼ãƒ‰ãŒèª­ã¿è¾¼ã¾ã‚Œã¦ã„ãªã„å ´åˆ
+        if (m_pFade->GetFade() != CFade::FADE_NONE)
+        {
+            m_pFade->Update();
 
-			if (m_pFade->GetFade() == CFade::FADE_CHANGE)
-			{// ƒtƒF[ƒhØ‚è‘Ö‚¦ó‘Ô‚Ìê‡
-				ChangeMode();
-			}
-		}
-	}
+            if (m_pFade->GetFade() == CFade::FADE_CHANGE)
+            {// ãƒ•ã‚§ãƒ¼ãƒ‰åˆ‡ã‚Šæ›¿ãˆçŠ¶æ…‹ã®å ´åˆ
+                ChangeMode();
+            }
+        }
+    }
 
-	if (m_pMode != nullptr)
-	{
-		m_pMode->Update();
-	}
+    if (m_pMode != nullptr)
+    {
+        m_pMode->Update();
+    }
 }
 
 //=====================================
-// •`‰æˆ—
+// æç”»å‡¦ç†
 //=====================================
 void CApplication::Draw()
 {
-	if (m_pRenderer != nullptr)
-	{
-		m_pRenderer->Draw();
-	}
+    if (m_pRenderer != nullptr)
+    {
+        m_pRenderer->Draw();
+    }
 }
 
 
 //=====================================
-// ƒ‚[ƒhİ’èˆ—
+// ãƒ¢ãƒ¼ãƒ‰è¨­å®šå‡¦ç†
 //=====================================
 void CApplication::SetMode(Mode mode)
 {
-	if (CApplication::GetFade()->GetFade() == CFade::FADE_NONE)
-	{
-		m_modeNext = mode;
-		m_pFade->SetFade();
-	}
+    if (CApplication::GetFade()->GetFade() == CFade::FADE_NONE)
+    {
+        m_modeNext = mode;
+        m_pFade->SetFade();
+    }
 }
 
 //=====================================
-// ƒ‚[ƒhØ‚è‘Ö‚¦ˆ—
+// ãƒ¢ãƒ¼ãƒ‰åˆ‡ã‚Šæ›¿ãˆå‡¦ç†
 //=====================================
 void CApplication::ChangeMode()
 {
-	// Œ»İƒ‚[ƒh‚ÌI—¹
-	if (m_pMode != nullptr)
-	{
-		m_pMode->Uninit();
-		delete m_pMode;
-		m_pMode = nullptr;
-	}
+    // ç¾åœ¨ãƒ¢ãƒ¼ãƒ‰ã®çµ‚äº†
+    if (m_pMode != nullptr)
+    {
+        m_pMode->Uninit();
+        delete m_pMode;
+        m_pMode = nullptr;
+    }
 
-	CObject::ReleaseAll();	// ‘S‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚ÌI—¹
+    CObject::ReleaseAll();	// å…¨ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çµ‚äº†
 
-	if (m_pSound != nullptr)
-	{// g—p’†‚ÌƒTƒEƒ“ƒh’â~
-		m_pSound->Stop();
-	}
+    if (m_pSound != nullptr)
+    {// ä½¿ç”¨ä¸­ã®ã‚µã‚¦ãƒ³ãƒ‰åœæ­¢
+        m_pSound->Stop();
+    }
 
-	// ƒ‚[ƒh‚ğ¶¬‚·‚é
-	switch (m_modeNext)
-	{
-	case CApplication::Mode_Title:
-		m_pMode = CTitle::Create();
-		break;
+    // ãƒ¢ãƒ¼ãƒ‰ã‚’ç”Ÿæˆã™ã‚‹
+    switch (m_modeNext)
+    {
+    case CApplication::Mode_Title:
+        m_pMode = CTitle::Create();
+        break;
 
-	case CApplication::Mode_Game:
-		m_pMode = CGame::Create();
-		break;
+    case CApplication::Mode_Game:
+        m_pMode = CGame::Create();
+        break;
 
-	case CApplication::Mode_Result:
-		m_pMode = CResult::Create();
-		break;
+    case CApplication::Mode_Result:
+        m_pMode = CResult::Create();
+        break;
 
-	default:
-		break;
-	}
-	m_mode = m_modeNext;	// Ÿ‚Ìƒ‚[ƒh‚É•ÏX
+    default:
+        break;
+    }
+    m_mode = m_modeNext;	// æ¬¡ã®ãƒ¢ãƒ¼ãƒ‰ã«å¤‰æ›´
 }

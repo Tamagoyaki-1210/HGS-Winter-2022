@@ -1,4 +1,4 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // application.h
 // Author : Tanimoto Kosuke
@@ -8,16 +8,16 @@
 #define _APPLICATION_H_
 
 //*****************************************************************************
-// ƒCƒ“ƒNƒ‹[ƒh
+// ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //*****************************************************************************
 #include <d3dx9.h>
 #include "sound.h"
 
 //---------------------------
-// ‘O•ûéŒ¾
+// å‰æ–¹å®£è¨€
 //---------------------------
 class CRenderer;
-class CInput;
+class CInputInterface;
 class CTexture;
 class CMode;
 class CFade;
@@ -25,57 +25,64 @@ class CSound;
 class CDebugProc;
 
 //---------------------------
-// ƒNƒ‰ƒXéŒ¾
+// ã‚¯ãƒ©ã‚¹å®£è¨€
 //---------------------------
 class CApplication
 {
 public:
-	enum Mode
-	{
-		Mode_Title = 0,		// ƒ^ƒCƒgƒ‹
-		Mode_Game,			// ƒQ[ƒ€
-		Mode_Result,		// ƒŠƒUƒ‹ƒg
+    enum Mode
+    {
+        Mode_Title = 0,		// ã‚¿ã‚¤ãƒˆãƒ«
+        Mode_Game,			// ã‚²ãƒ¼ãƒ 
+        Mode_Result,		// ãƒªã‚¶ãƒ«ãƒˆ
 
-		Mode_Max
-	};
+        Mode_Max
+    };
 
-	enum Input_type
-	{
-		Input_Keyboard = 0,	// ƒL[ƒ{[ƒh
-		Input_Pad,			// ƒpƒbƒh
-		Input_Mouse,		// ƒ}ƒEƒX
+    //enum Input_type
+    //{
+    //	Input_Keyboard = 0,	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
+    //	Input_Pad,			// ãƒ‘ãƒƒãƒ‰
+    //	Input_Mouse,		// ãƒã‚¦ã‚¹
 
-		Input_Max
-	};
+    //	Input_Max
+    //};
 
-	CApplication();
-	~CApplication();
+    CApplication();
+    ~CApplication();
 
-	HRESULT Init(HINSTANCE hInstance, HWND hWnd);
-	void Uninit();
-	void Update();
-	void Draw();
+    HRESULT Init(HINSTANCE hInstance, HWND hWnd);
+    void Uninit();
+    void Update();
+    void Draw();
 
-	static CRenderer* GetRenderer() { return m_pRenderer; }	// ƒŒƒ“ƒ_ƒ‰[‚Ìæ“¾ˆ—
-	static CTexture* GetTexture() { return m_pTexture; }	// ‰æ‘œ‚Ìæ“¾ˆ—
-	static CSound* GetSound() { return m_pSound; }			// ƒTƒEƒ“ƒh‚Ìæ“¾ˆ—
-	static CFade* GetFade() { return m_pFade; }				// ƒtƒF[ƒh‚Ìæ“¾ˆ—
+    CRenderer* GetRenderer() const { return m_pRenderer; }	// ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã®å–å¾—å‡¦ç†
+    CTexture* GetTexture() const { return m_pTexture; }	// ç”»åƒã®å–å¾—å‡¦ç†
+    CSound* GetSound() const { return m_pSound; }			// ã‚µã‚¦ãƒ³ãƒ‰ã®å–å¾—å‡¦ç†
+    CFade* GetFade() const { return m_pFade; }				// ãƒ•ã‚§ãƒ¼ãƒ‰ã®å–å¾—å‡¦ç†
+    CInputInterface* GetInput() const { return m_pInput; }
 
-	static Mode GetMode() { return m_mode; }				// ƒ‚[ƒh‚Ìæ“¾ˆ—
-	static void SetMode(Mode mode);							// ƒ‚[ƒh‚Ìİ’èˆ—
-	void ChangeMode();										// ƒ‚[ƒh‚Ì•ÏXˆ—
+    Mode GetMode() const { return m_mode; }				// ãƒ¢ãƒ¼ãƒ‰ã®å–å¾—å‡¦ç†
+    void SetMode(Mode mode);							// ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®šå‡¦ç†
+    void ChangeMode();										// ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´å‡¦ç†
+
 
 private:
-	static CRenderer*		m_pRenderer;
-	static CInput*			m_pInput[Input_Max];
-	static CTexture*		m_pTexture;
-	static CSound*			m_pSound;
-	static CFade*			m_pFade;
-	static CMode*			m_pMode;
-	static CDebugProc*		m_pDebug;
+    CRenderer* m_pRenderer;
+    //static CInput*			m_pInput[Input_Max];
 
-	static Mode	m_mode;		//Œ»İƒ‚[ƒh
-	static Mode m_modeNext;	//Ÿ‚Ìƒ‚[ƒh
+    CTexture* m_pTexture;
+    CSound* m_pSound;
+    CFade* m_pFade;
+    CMode* m_pMode;
+    CDebugProc* m_pDebug;
+
+    CInputInterface* m_pInput;
+
+    Mode	m_mode;		//ç¾åœ¨ãƒ¢ãƒ¼ãƒ‰
+    Mode m_modeNext;	//æ¬¡ã®ãƒ¢ãƒ¼ãƒ‰
 };
+
+extern CApplication* g_pApplication;
 
 #endif // !_APPLICATION_H_

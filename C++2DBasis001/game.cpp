@@ -1,4 +1,4 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // game.cpp
 // Author : Tanimoto Kosuke
@@ -8,10 +8,11 @@
 #include "application.h"
 #include "object2D.h"
 #include "fontString.h"
-#include "inputKeyboard.h"
+//#include "inputKeyboard.h"
+#include "DirectInput.h"
 
 //=====================================
-// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CGame::CGame()
 {
@@ -19,7 +20,7 @@ CGame::CGame()
 }
 
 //=====================================
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CGame::~CGame()
 {
@@ -27,21 +28,21 @@ CGame::~CGame()
 }
 
 //=====================================
-// ‰Šú‰»ˆ—
+// åˆæœŸåŒ–å‡¦ç†
 //=====================================
 HRESULT CGame::Init()
 {
-	CApplication::GetSound()->Play(CSound::SOUND_LABEL_BGM_GAME);
+    g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_BGM_GAME);
 
-	CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100,100));
+    CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100, 100));
 
-	CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ƒQ[ƒ€");
+    CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ã‚²ãƒ¼ãƒ ");
 
-	return S_OK;
+    return S_OK;
 }
 
 //=====================================
-// I—¹ˆ—
+// çµ‚äº†å‡¦ç†
 //=====================================
 void CGame::Uninit()
 {
@@ -49,36 +50,41 @@ void CGame::Uninit()
 }
 
 //=====================================
-// XVˆ—
+// æ›´æ–°å‡¦ç†
 //=====================================
 void CGame::Update()
 {
-	Input();
+    Input();
 }
 
 //=====================================
-// “ü—Íˆ—
+// å…¥åŠ›å‡¦ç†
 //=====================================
 void CGame::Input()
 {
-	// P‚Åƒ|[ƒYØ‚è‘Ö‚¦
-	if (CInputKeyboard::GetKeyboardTrigger(DIK_RETURN))
-	{
-		CApplication::SetMode(CApplication::Mode_Result);
-	}
+    //// Pã§ãƒãƒ¼ã‚ºåˆ‡ã‚Šæ›¿ãˆ
+    //if (CInputKeyboard::GetKeyboardTrigger(DIK_RETURN))
+    //{
+    //    g_pApplication->SetMode(g_pApplication->Mode_Result);
+    //}
+
+    if (g_pApplication->GetInput()->KeyDown(DIK_RETURN, true))
+    {
+        g_pApplication->SetMode(g_pApplication->Mode_Result);
+    }
 }
 
 //=====================================
-// ¶¬ˆ—
+// ç”Ÿæˆå‡¦ç†
 //=====================================
 CGame* CGame::Create()
 {
-	CGame* pGame = new CGame;
+    CGame* pGame = new CGame;
 
-	if (FAILED(pGame->Init()))
-	{
-		return nullptr;
-	}
+    if (FAILED(pGame->Init()))
+    {
+        return nullptr;
+    }
 
-	return pGame;
+    return pGame;
 }

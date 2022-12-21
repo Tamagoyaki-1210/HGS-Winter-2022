@@ -1,18 +1,18 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // main.cpp
 // Author : Tanimoto Kosuke
 //
 //=============================================================================
 //*****************************************************************************
-// ƒ‰ƒCƒuƒ‰ƒŠ[ƒŠƒ“ƒN
+// ãƒ©ã‚¤ãƒ–ãƒ©ãƒªãƒ¼ãƒªãƒ³ã‚¯
 //*****************************************************************************
 #pragma comment(lib,"d3d9.lib")
 #pragma comment(lib,"d3dx9.lib")
 #pragma comment(lib,"winmm.lib")
 
 //*****************************************************************************
-// ƒCƒ“ƒNƒ‹[ƒh
+// ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //*****************************************************************************
 #include "main.h"
 #include <Windows.h>
@@ -20,220 +20,223 @@
 #include "debugProc.h"
 
 //*****************************************************************************
-// ’è”’è‹`
+// å®šæ•°å®šç¾©
 //*****************************************************************************
 namespace
 {
-	// ƒEƒCƒ“ƒhƒE‚ÌƒNƒ‰ƒX–¼
-	LPCTSTR CLASS_NAME = _T("AppClass");
-	// ƒEƒCƒ“ƒhƒE‚ÌƒLƒƒƒvƒVƒ‡ƒ“–¼
-	LPCTSTR WINDOW_NAME = _T("2DƒQ[ƒ€§ì’†");
+    // ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ã‚¯ãƒ©ã‚¹å
+    LPCTSTR CLASS_NAME = _T("AppClass");
+    // ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³å
+    LPCTSTR WINDOW_NAME = _T("2Dã‚²ãƒ¼ãƒ åˆ¶ä½œä¸­");
 }
 
 //*****************************************************************************
-// ƒvƒƒgƒ^ƒCƒvéŒ¾
+// ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 //*****************************************************************************
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 //*****************************************************************************
-// ƒOƒ[ƒoƒ‹•Ï”
+// ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°
 //*****************************************************************************
 #ifdef _DEBUG
-// FPSƒJƒEƒ“ƒ^
+// FPSã‚«ã‚¦ãƒ³ã‚¿
 int g_nCountFPS;
 #endif // _DEBUG
 
 //--------------------------------
-// Ã“I•Ï”
+// é™çš„å¤‰æ•°
 //--------------------------------
 static bool s_bExit;
 
+CApplication* g_pApplication = nullptr;
+
 //=============================================================================
-// ƒƒCƒ“ŠÖ”
+// ãƒ¡ã‚¤ãƒ³é–¢æ•°
 //=============================================================================
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE/* hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
 {
-	WNDCLASSEX wcex =
-	{
-		sizeof(WNDCLASSEX),
-		CS_CLASSDC,
-		WndProc,
-		0,
-		0,
-		hInstance,
-		NULL,
-		LoadCursor(NULL, IDC_ARROW),
-		(HBRUSH)(COLOR_WINDOW + 1),
-		NULL,
-		CLASS_NAME,
-		NULL
-	};
+    WNDCLASSEX wcex =
+    {
+        sizeof(WNDCLASSEX),
+        CS_CLASSDC,
+        WndProc,
+        0,
+        0,
+        hInstance,
+        NULL,
+        LoadCursor(NULL, IDC_ARROW),
+        (HBRUSH)(COLOR_WINDOW + 1),
+        NULL,
+        CLASS_NAME,
+        NULL
+    };
 
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^
-	RegisterClassEx(&wcex);
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²
+    RegisterClassEx(&wcex);
 
-	RECT rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-	// w’è‚µ‚½ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ğŠm•Û‚·‚é‚½‚ß‚É•K—v‚ÈƒEƒBƒ“ƒhƒEÀ•W‚ğŒvZ
-	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
+    RECT rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+    // æŒ‡å®šã—ãŸã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã‚’ç¢ºä¿ã™ã‚‹ãŸã‚ã«å¿…è¦ãªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åº§æ¨™ã‚’è¨ˆç®—
+    AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
 
-	// ƒEƒBƒ“ƒhƒE‚Ìì¬
-	HWND hWnd = CreateWindow(CLASS_NAME,
-		WINDOW_NAME,
-		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		(rect.right - rect.left),
-		(rect.bottom - rect.top),
-		NULL,
-		NULL,
-		hInstance,
-		NULL);
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
+    HWND hWnd = CreateWindow(CLASS_NAME,
+        WINDOW_NAME,
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        (rect.right - rect.left),
+        (rect.bottom - rect.top),
+        NULL,
+        NULL,
+        hInstance,
+        NULL);
 
-	// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ì¶¬
-	CApplication* pApplication = new CApplication;
+    // ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ç”Ÿæˆ
+    g_pApplication = new CApplication;
 
-	if (FAILED(pApplication->Init(hInstance, hWnd)))
-	{
-		return -1;
-	}
 
-	// •ª‰ğ”\‚ğİ’è
-	timeBeginPeriod(1);
+    if (FAILED(g_pApplication->Init(hInstance, hWnd)))
+    {
+        return -1;
+    }
 
-	// ƒtƒŒ[ƒ€ƒJƒEƒ“ƒg‰Šú‰»
-	DWORD dwCurrentTime = 0;
-	DWORD dwExecLastTime = timeGetTime();
+    // åˆ†è§£èƒ½ã‚’è¨­å®š
+    timeBeginPeriod(1);
+
+    // ãƒ•ãƒ¬ãƒ¼ãƒ ã‚«ã‚¦ãƒ³ãƒˆåˆæœŸåŒ–
+    DWORD dwCurrentTime = 0;
+    DWORD dwExecLastTime = timeGetTime();
 #ifdef _DEBUG
-	DWORD dwFrameCount = 0;
-	DWORD dwFPSLastTime = dwExecLastTime;
+    DWORD dwFrameCount = 0;
+    DWORD dwFPSLastTime = dwExecLastTime;
 #endif // _DEBUG
 
-	// ƒEƒCƒ“ƒhƒE‚Ì•\¦
-	ShowWindow(hWnd, nCmdShow);
-	UpdateWindow(hWnd);
+    // ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®è¡¨ç¤º
+    ShowWindow(hWnd, nCmdShow);
+    UpdateWindow(hWnd);
 
-	MSG msg;
+    MSG msg;
 
-	// ƒƒbƒZ[ƒWƒ‹[ƒv
-	while (true)
-	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-		{
-			if (msg.message == WM_QUIT)
-			{ // PostQuitMessage()‚ªŒÄ‚Î‚ê‚½‚çƒ‹[ƒvI—¹
-				break;
-			}
-			else
-			{
-				// ƒƒbƒZ[ƒW‚Ì–|–ó‚ÆƒfƒBƒXƒpƒbƒ`
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			}
-		}
-		else
-		{
-			dwCurrentTime = timeGetTime();	// Œ»İ‚ÌŠÔ‚ğæ“¾
+    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—
+    while (true)
+    {
+        if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+        {
+            if (msg.message == WM_QUIT)
+            { // PostQuitMessage()ãŒå‘¼ã°ã‚ŒãŸã‚‰ãƒ«ãƒ¼ãƒ—çµ‚äº†
+                break;
+            }
+            else
+            {
+                // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ç¿»è¨³ã¨ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else
+        {
+            dwCurrentTime = timeGetTime();	// ç¾åœ¨ã®æ™‚é–“ã‚’å–å¾—
 #ifdef _DEBUG
-			if ((dwCurrentTime - dwFPSLastTime) >= 500)
-			{// 0.5•b‚²‚Æ‚ÉÀs
-			 // FPS‚ğZo
-				g_nCountFPS = dwFrameCount * 1000 / (dwCurrentTime - dwFPSLastTime);
-				dwFPSLastTime = dwCurrentTime;	// Œ»İ‚ÌŠÔ‚ğ•Û‘¶
-				dwFrameCount = 0;
-			}
+            if ((dwCurrentTime - dwFPSLastTime) >= 500)
+            {// 0.5ç§’ã”ã¨ã«å®Ÿè¡Œ
+             // FPSã‚’ç®—å‡º
+                g_nCountFPS = dwFrameCount * 1000 / (dwCurrentTime - dwFPSLastTime);
+                dwFPSLastTime = dwCurrentTime;	// ç¾åœ¨ã®æ™‚é–“ã‚’ä¿å­˜
+                dwFrameCount = 0;
+            }
 #endif // _DEBUG
 
-			if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
-			{ // 1/60•bŒo‰ß
-			  // Œ»İ‚ÌŠÔ‚ğ•Û‘¶
-				dwExecLastTime = dwCurrentTime;
+            if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
+            { // 1/60ç§’çµŒé
+              // ç¾åœ¨ã®æ™‚é–“ã‚’ä¿å­˜
+                dwExecLastTime = dwCurrentTime;
 
-				if (pApplication != nullptr)
-				{
-					// XVˆ—
-					pApplication->Update();
+                if (g_pApplication != nullptr)
+                {
+                    // æ›´æ–°å‡¦ç†
+                    g_pApplication->Update();
 
-					// •`‰æˆ—
-					pApplication->Draw();
-				}
+                    // æç”»å‡¦ç†
+                    g_pApplication->Draw();
+                }
 
 #ifdef _DEBUG
-				dwFrameCount++;
+                dwFrameCount++;
 #endif // _DEBUG
-				if (s_bExit)
-				{
-					break;	//ƒEƒCƒ“ƒhƒE‚ğ”jŠü‚·‚é
-				}
-			}
-		}
-	}
+                if (s_bExit)
+                {
+                    break;	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ç ´æ£„ã™ã‚‹
+                }
+            }
+        }
+    }
 
-	if (pApplication != nullptr)
-	{
-		pApplication->Uninit();
-		delete pApplication;
-		pApplication = nullptr;
-	}
+    if (g_pApplication != nullptr)
+    {
+        g_pApplication->Uninit();
+        delete g_pApplication;
+        g_pApplication = nullptr;
+    }
 
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^‚ğ‰ğœ
-	UnregisterClass(CLASS_NAME, wcex.hInstance);
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²ã‚’è§£é™¤
+    UnregisterClass(CLASS_NAME, wcex.hInstance);
 
-	// •ª‰ğ”\‚ğ–ß‚·
-	timeEndPeriod(1);
+    // åˆ†è§£èƒ½ã‚’æˆ»ã™
+    timeEndPeriod(1);
 
-	return (int)msg.wParam;
+    return (int)msg.wParam;
 }
 
 //=============================================================================
-// ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
+// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 //=============================================================================
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if (s_bExit)
-	{
-		// ƒEƒBƒ“ƒhƒE‚ğ”jŠü‚·‚é
-		DestroyWindow(hWnd);
-	}
+    if (s_bExit)
+    {
+        // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ç ´æ£„ã™ã‚‹
+        DestroyWindow(hWnd);
+    }
 
-	switch (uMsg)
-	{
-	case WM_CREATE:
-		break;
+    switch (uMsg)
+    {
+    case WM_CREATE:
+        break;
 
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	case WM_KEYDOWN:
-		switch (wParam)
-		{
-		case VK_ESCAPE: // [ESC]ƒL[‚ª‰Ÿ‚³‚ê‚½
-						// ƒEƒBƒ“ƒhƒE‚ğ”jŠü
-			DestroyWindow(hWnd);
-			break;
-		}
-		break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+    case WM_KEYDOWN:
+        switch (wParam)
+        {
+        case VK_ESCAPE: // [ESC]ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸ
+            // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ç ´æ£„
+            DestroyWindow(hWnd);
+            break;
+        }
+        break;
 
-	default:
-		break;
-	}
-	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+    default:
+        break;
+    }
+    return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
 //=====================================
-// Window‚ÌI—¹ˆ—
+// Windowã®çµ‚äº†å‡¦ç†
 //=====================================
 void ExitExe()
 {
-	s_bExit = true;
+    s_bExit = true;
 }
 
 #ifdef _DEBUG
 
 //=====================================
-// FPS‚Ìæ“¾ˆ—
+// FPSã®å–å¾—å‡¦ç†
 //=====================================
 int GetFPS()
 {
-	return g_nCountFPS;
+    return g_nCountFPS;
 }
 #endif // _DEBUG

@@ -1,4 +1,4 @@
-//=============================================================================
+ï»¿//=============================================================================
 //
 // texture.cpp
 // Author : Tanimoto Kosuke
@@ -10,18 +10,18 @@
 
 LPDIRECT3DTEXTURE9 CTexture::m_pTextureType[TEXTURE_MAX] = {};
 
-// ‰æ‘œ‚ÌƒpƒX‚ğİ’è
+// ç”»åƒã®ãƒ‘ã‚¹ã‚’è¨­å®š
 char* CTexture::m_pTexturePass[TEXTURE_MAX] =
 {
-	" ",
+    " ",
 
-	"data\\TEXTURE\\Font\\Japanese2000unicode.png",
-	"data\\TEXTURE\\Number\\number000.png",
+    "data\\TEXTURE\\Font\\Japanese2000unicode.png",
+    "data\\TEXTURE\\Number\\number000.png",
 
 };
 
 //=====================================
-// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CTexture::CTexture()
 {
@@ -29,7 +29,7 @@ CTexture::CTexture()
 }
 
 //=====================================
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //=====================================
 CTexture::~CTexture()
 {
@@ -37,56 +37,56 @@ CTexture::~CTexture()
 }
 
 //=====================================
-// ‘S‚Ä‚Ì‰æ‘œ‚Ì‰ğ•úˆ—
+// å…¨ã¦ã®ç”»åƒã®è§£æ”¾å‡¦ç†
 //=====================================
 void CTexture::ReleaseAll()
 {
-	for (int nInd = 0; nInd < TEXTURE_MAX; nInd++)
-	{
-		if (m_pTextureType[nInd] != nullptr)
-		{
-			m_pTextureType[nInd]->Release();
-			m_pTextureType[nInd] = nullptr;
-		}
-	}
+    for (int nInd = 0; nInd < TEXTURE_MAX; nInd++)
+    {
+        if (m_pTextureType[nInd] != nullptr)
+        {
+            m_pTextureType[nInd]->Release();
+            m_pTextureType[nInd] = nullptr;
+        }
+    }
 }
 
 //=====================================
-// ‘S‚Ä‚Ì‰æ‘œ‚Ì“Ç‚İ‚İˆ—
+// å…¨ã¦ã®ç”»åƒã®èª­ã¿è¾¼ã¿å‡¦ç†
 //=====================================
 void CTexture::LoadAll()
 {
-	LPDIRECT3DDEVICE9 pDevice = CApplication::GetRenderer()->GetDevice();
+    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();
 
-	for (int nInd = 0; nInd < TEXTURE_MAX; nInd++)
-	{
-		if (m_pTextureType[nInd] != nullptr)
-		{
-			m_pTextureType[nInd]->Release();
-			m_pTextureType[nInd] = nullptr;
-		}
+    for (int nInd = 0; nInd < TEXTURE_MAX; nInd++)
+    {
+        if (m_pTextureType[nInd] != nullptr)
+        {
+            m_pTextureType[nInd]->Release();
+            m_pTextureType[nInd] = nullptr;
+        }
 
-		// ƒeƒNƒXƒ`ƒƒ‚Ì“Ç‚İ‚İ
-		D3DXCreateTextureFromFile(pDevice,
-			m_pTexturePass[nInd],
-			&m_pTextureType[nInd]);
-	}
+        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®èª­ã¿è¾¼ã¿
+        D3DXCreateTextureFromFile(pDevice,
+            m_pTexturePass[nInd],
+            &m_pTextureType[nInd]);
+    }
 }
 
 //=====================================
-// ‰æ‘œí—Ş‚Ìæ“¾ˆ—
+// ç”»åƒç¨®é¡ã®å–å¾—å‡¦ç†
 //=====================================
 void CTexture::GetTextureType(Texture_Type textype)
 {
-	//ƒeƒNƒXƒ`ƒƒ‚Ìİ’è
-	CApplication::GetRenderer()->GetDevice()->SetTexture(0, m_pTextureType[textype]);
+    //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
+    g_pApplication->GetRenderer()->GetDevice()->SetTexture(0, m_pTextureType[textype]);
 }
 
 //=====================================
-// ‰æ‘œ‚Ì‰ğ•úˆ—
+// ç”»åƒã®è§£æ”¾å‡¦ç†
 //=====================================
 void CTexture::TextureClear()
 {
-	//ƒeƒNƒXƒ`ƒƒ‚Ìİ’è
-	CApplication::GetRenderer()->GetDevice()->SetTexture(0, nullptr);
+    //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
+    g_pApplication->GetRenderer()->GetDevice()->SetTexture(0, nullptr);
 }
