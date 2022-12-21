@@ -75,7 +75,7 @@ void CTitle::Input()
     const auto p_Input = g_pApplication->GetInput();
 
     // モード切り替え
-    if (p_Input->KeyDown(DIK_RETURN, true))
+    if (p_Input->KeyDown(DIK_RETURN, true) || p_Input->ControllerButtonDown(XINPUT_GAMEPAD_B, true))
     {
         g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
         g_pApplication->SetMode(g_pApplication->Mode_Game);
@@ -115,8 +115,6 @@ void CTitle::Input()
             }
         }
     }
-
-    p_Input->SetMoterSpeed(10000, 5000);
 }
 
 //=====================================
