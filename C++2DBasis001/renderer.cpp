@@ -55,6 +55,10 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
         return E_FAIL;
     }
 
+    D3DCAPS9 m_caps;
+    if (FAILED(m_pD3D->GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &m_caps)))
+        return E_FAIL;
+
     // デバイスのプレゼンテーションパラメータの設定
     ZeroMemory(&d3dpp, sizeof(d3dpp));					// ワークをゼロクリア
     d3dpp.BackBufferCount = 1;							// バックバッファの数
@@ -65,22 +69,32 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
     d3dpp.EnableAutoDepthStencil = TRUE;						// デプスバッファ（Ｚバッファ）とステンシルバッファを作成
     d3dpp.AutoDepthStencilFormat = D3DFMT_D16;					// デプスバッファとして16bitを使う
     d3dpp.Windowed = bWindow;						// ウィンドウモード
-    d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;		// リフレッシュレート
-    d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;	// インターバル
-
-    // ディスプレイアダプタを表すためのデバイスを作成
-// 描画と頂点処理をハードウェアで行なう
-    if ((FAILED(m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice))) &&
-        // 上記の設定が失敗したら
-        // 描画をハードウェアで行い、頂点処理はCPUで行なう
-        (FAILED(m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice))) &&
-        // 上記の設定が失敗したら
-        // 描画と頂点処理をCPUで行なう
-        (FAILED(m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_REF, hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice))))
+    if (!bWindow)
     {
-        // 生成失敗
-        return E_FAIL;
+        d3dpp.FullScreen_RefreshRateInHz = d3ddm.RefreshRate;
+        d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
     }
+    else
+        d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+
+    if (m_pD3D->CheckDeviceMultiSampleType(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, d3ddm.Format, true, D3DMULTISAMPLE_4_SAMPLES, NULL)
+        == D3D_OK)
+    {
+        d3dpp.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES;
+    }
+
+    DWORD processing = 0;
+    if (m_caps.VertexProcessingCaps != 0)
+        processing = D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_PUREDEVICE;
+    else
+        processing = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+
+
+    if (FAILED(
+        m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, processing, &d3dpp, &m_pD3DDevice)))
+        return E_FAIL;
+
+
 
     // レンダーステートの設定
     m_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);				//カリングの設定
@@ -89,8 +103,8 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
     m_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);	//アルファブレンドの設定
 
     // サンプラーステートの設定
-    m_pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);	//テクスチャの大きさに合わせて綺麗に貼る
-    m_pD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);	//テクスチャの大きさに合わせて綺麗に貼る
+    m_pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_ANISOTROPIC);	//テクスチャの大きさに合わせて綺麗に貼る
+    m_pD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_ANISOTROPIC);	//テクスチャの大きさに合わせて綺麗に貼る
     m_pD3DDevice->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);	//テクスチャを繰り返しに貼る
     m_pD3DDevice->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);	//テクスチャを繰り返しに貼る
 
