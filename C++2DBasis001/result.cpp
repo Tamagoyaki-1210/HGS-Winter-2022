@@ -30,7 +30,7 @@ CResult::~CResult()
 //=====================================
 HRESULT CResult::Init()
 {
-    g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_BGM_RESULT);
+	CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_BGM_RESULT);
 
     CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100, 100));
 
@@ -62,9 +62,9 @@ void CResult::Input()
 {
     // モード切り替え
 
-    if (g_pApplication->GetInput()->KeyDown(DIK_RETURN, true))
+    if (CApplication::GetInstance()->GetInput()->KeyDown(DIK_RETURN, true))
     {
-        g_pApplication->SetMode(g_pApplication->Mode_Title);
+		CApplication::GetInstance()->SetMode(CApplication::Mode_Title);
     }
 }
 

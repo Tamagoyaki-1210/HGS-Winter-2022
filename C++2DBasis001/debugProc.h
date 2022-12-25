@@ -26,15 +26,16 @@ public:
 	HRESULT Init();
 	void Uninit();
 														
-	static void Print(const char *pFormat, ...);		// 文字の入力処理
-	static void Draw();
+	void Print(const char *pFormat, ...);		// 文字の入力処理
+	void Draw();
 
 	static CDebugProc* Create();
 
 private:
 	static const int Str_Max = 2048;	// 文字の最大数
 
-	static LPD3DXFONT m_pFont;			// フォント
-	static std::string m_str;			// 文字列
+	LPD3DXFONT m_pFont;			// フォント
+	std::string m_str;			// 文字列
 };
+
 #endif	// _DEBUG_PROC_H_

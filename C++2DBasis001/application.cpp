@@ -16,12 +16,14 @@
 #include "result.h"
 #include "DirectInput.h"
 
+CApplication* CApplication::m_pApplication = nullptr;
+
 //=====================================
 // デフォルトコンストラクタ
 //=====================================
 CApplication::CApplication() : m_pRenderer(nullptr), m_pTexture(nullptr), m_pSound(nullptr), m_pFade(nullptr),
 m_pMode(nullptr),
-m_pDebug(nullptr),
+m_pDebugProc(nullptr),
 m_pInput(nullptr), m_mode(), m_modeNext()
 {
 }
@@ -58,10 +60,10 @@ HRESULT CApplication::Init(HINSTANCE hInstance, HWND hWnd)
         m_pTexture->LoadAll();
     }
 
-    if (m_pDebug == nullptr)
-    {
-        m_pDebug = CDebugProc::Create();
-    }
+	if (m_pDebugProc == nullptr)
+	{
+		m_pDebugProc = CDebugProc::Create();
+	}
 
     if (m_pSound == nullptr)
     {
@@ -83,47 +85,10 @@ HRESULT CApplication::Init(HINSTANCE hInstance, HWND hWnd)
         m_pFade->SetFade();
     }
 
-
     if (!CreateDIInput(&m_pInput, hWnd, hInstance, false))
     {
         return -1;
     }
-
-    //// インプットデバイスの生成
-    //for (int nCnt = 0; nCnt < Input_Max; nCnt++)
-    //{
-    //	if (m_pInput[nCnt] == nullptr)
-    //	{
-    //		// 種別毎の設定
-    //		switch ((Input_type)nCnt)
-    //		{
-    //		case CApplication::Input_Keyboard:
-    //			// キーボードインスタンスの生成
-    //			m_pInput[nCnt] = new CInputKeyboard;
-    //			break;
-
-    //		case CApplication::Input_Pad:
-    //			// パッドインスタンスの生成
-    //			m_pInput[nCnt] = new CInputPad;
-    //			break;
-
-    //		case CApplication::Input_Mouse:
-    //			// マウスインスタンスの生成
-    //			m_pInput[nCnt] = new CInputMouse;
-    //			break;
-
-    //		default:
-    //			break;
-    //		}
-
-    //		// インプットデバイスの初期化処理
-    //		if (FAILED(m_pInput[nCnt]->Init(hInstance, hWnd)))
-    //		{
-    //			return -1;
-    //		}
-    //	}
-    //}
-
 
     return S_OK;
 }
@@ -149,16 +114,6 @@ void CApplication::Uninit()
         m_pMode = nullptr;
     }
 
-    //// インプットデバイスの破棄
-    //for (int nCnt = 0; nCnt < Input_Max; nCnt++)
-    //{
-    //	if (m_pInput[nCnt] != nullptr)
-    //	{
-    //		m_pInput[nCnt]->Uninit();
-    //		delete m_pInput[nCnt];
-    //		m_pInput[nCnt] = nullptr;
-    //	}
-    //}
     m_pInput->Shutdown();
 
     // サウンドの破棄
@@ -178,10 +133,10 @@ void CApplication::Uninit()
     }
 
     // デバッグテキストの破棄
-    if (m_pDebug != nullptr)
+    if (m_pDebugProc != nullptr)
     {
-        delete m_pDebug;
-        m_pDebug = nullptr;
+        delete m_pDebugProc;
+        m_pDebugProc = nullptr;
     }
 
     // オブジェクト全体の終了
@@ -194,6 +149,8 @@ void CApplication::Uninit()
         delete m_pTexture;
         m_pTexture = nullptr;
     }
+
+	delete this;	// 自身のポインタの削除
 }
 
 //=====================================

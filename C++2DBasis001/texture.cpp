@@ -56,7 +56,7 @@ void CTexture::ReleaseAll()
 //=====================================
 void CTexture::LoadAll()
 {
-    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();
+    LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
 
     for (int nInd = 0; nInd < TEXTURE_MAX; nInd++)
     {
@@ -79,7 +79,7 @@ void CTexture::LoadAll()
 void CTexture::GetTextureType(Texture_Type textype)
 {
     //テクスチャの設定
-    g_pApplication->GetRenderer()->GetDevice()->SetTexture(0, m_pTextureType[textype]);
+	CApplication::GetInstance()->GetRenderer()->GetDevice()->SetTexture(0, m_pTextureType[textype]);
 }
 
 //=====================================
@@ -88,5 +88,5 @@ void CTexture::GetTextureType(Texture_Type textype)
 void CTexture::TextureClear()
 {
     //テクスチャの設定
-    g_pApplication->GetRenderer()->GetDevice()->SetTexture(0, nullptr);
+	CApplication::GetInstance()->GetRenderer()->GetDevice()->SetTexture(0, nullptr);
 }

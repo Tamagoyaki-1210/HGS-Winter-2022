@@ -32,7 +32,7 @@ CTitle::~CTitle()
 //=====================================
 HRESULT CTitle::Init()
 {
-    g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_BGM_TITLE);
+	CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_BGM_TITLE);
 
     CObject_2D* pObj2D = nullptr;
 
@@ -72,13 +72,13 @@ void CTitle::Update()
 //=====================================
 void CTitle::Input()
 {
-    const auto p_Input = g_pApplication->GetInput();
+    const auto p_Input = CApplication::GetInstance()->GetInput();
 
     // モード切り替え
     if (p_Input->KeyDown(DIK_RETURN, true) || p_Input->ControllerButtonDown(XINPUT_GAMEPAD_B, true))
     {
-        g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
-        g_pApplication->SetMode(g_pApplication->Mode_Game);
+		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
+		CApplication::GetInstance()->SetMode(CApplication::Mode_Game);
     }
 
     const POINT pt = p_Input->GetMousePos();
@@ -110,8 +110,8 @@ void CTitle::Input()
             // 左ボタンを話した時に移動
             if (p_Input->MouseButtonDown(MOUSE_LEFT_BUTTON, true))
             {
-                g_pApplication->GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
-                g_pApplication->SetMode(g_pApplication->Mode_Game);
+				CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_YES);
+				CApplication::GetInstance()->SetMode(CApplication::Mode_Game);
             }
         }
     }

@@ -35,7 +35,7 @@ CFade::~CFade()
 //=====================================
 HRESULT CFade::Init(void)
 {
-    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();
+    LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
 
     // 頂点バッファの生成
     pDevice->CreateVertexBuffer(
@@ -155,7 +155,7 @@ void CFade::Update(void)
 //=====================================
 void CFade::Draw(void)
 {
-    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();
+    LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
 
     // 頂点バッファをデータストリームに設定
     pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));

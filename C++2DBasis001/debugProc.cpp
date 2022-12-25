@@ -9,13 +9,10 @@
 #include "renderer.h"
 #include "main.h"
 
-LPD3DXFONT CDebugProc::m_pFont = nullptr;
-std::string CDebugProc::m_str = "";
-
 //=====================================
 // デフォルトコンストラクタ
 //=====================================
-CDebugProc::CDebugProc()
+CDebugProc::CDebugProc() : m_pFont(), m_str()
 {
 
 }
@@ -34,7 +31,7 @@ CDebugProc::~CDebugProc()
 HRESULT CDebugProc::Init()
 {
     //初期化処理
-    LPDIRECT3DDEVICE9 pDevice = g_pApplication->GetRenderer()->GetDevice();		//デバイスの取得
+    LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();		//デバイスの取得
 
     // デバッグ情報表示用フォントの生成
     D3DXCreateFont(pDevice, 18, 0, 0, 0, FALSE, SHIFTJIS_CHARSET,
@@ -146,13 +143,13 @@ void CDebugProc::Draw()
 //============================================================================
 CDebugProc* CDebugProc::Create()
 {
-    CDebugProc* pDebug = new CDebugProc;
+	CDebugProc* pDebug = new CDebugProc;
 
-    // 初期化処理
-    if (FAILED(pDebug->Init()))
-    {
-        return nullptr;
-    }
+	// 初期化処理
+	if (FAILED(pDebug->Init()))
+	{
+		return nullptr;
+	}
 
-    return pDebug;
+	return pDebug;
 }
