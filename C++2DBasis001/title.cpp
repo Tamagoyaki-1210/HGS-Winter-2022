@@ -9,7 +9,6 @@
 #include "object2D.h"
 #include "fontString.h"
 #include "DirectInput.h"
-#include "score.h"
 
 //=====================================
 // デフォルトコンストラクタ

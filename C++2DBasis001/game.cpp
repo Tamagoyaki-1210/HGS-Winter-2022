@@ -10,6 +10,7 @@
 #include "fontString.h"
 //#include "inputKeyboard.h"
 #include "DirectInput.h"
+#include"score.h"
 
 //=====================================
 // デフォルトコンストラクタ
@@ -38,6 +39,8 @@ HRESULT CGame::Init()
 
     CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ゲーム");
 
+	
+	
 	CScore* pScore = CScore::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 12, 0.0f), D3DXVECTOR2(10.0f, 20.0f));
 	pScore->AddScore(12345609);
 
