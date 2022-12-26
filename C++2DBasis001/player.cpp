@@ -182,6 +182,7 @@ void CPlayer::PlayerCollision()
 					&& fUpp < fLowSub && fLow > fUppSub)
 				{
 					SetPos(Collision(pObject));
+					pObject->SetIsCollision(true);
 				}
 			}
 			// 現在位置ポインタに次回ポインタを代入する(ポインタを進める処理)
