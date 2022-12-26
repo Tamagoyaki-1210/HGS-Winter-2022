@@ -40,6 +40,8 @@ public:
 	void Update() override;
 	void Draw() override;
 	
+	D3DXVECTOR3 Collision(CObject* obj);
+
 	void SetUV();
 	void SetAnimAuto(int nSpeed);
 	void SetAnimControl(int nAnimColumn, int nAnimLine);
@@ -49,14 +51,17 @@ public:
 
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
+	void SetCollision(bool collision) { m_bCollision = collision; }
 	void SetSize(const D3DXVECTOR2 size);
 	void SetAnimDiv(int nDivX, int nDivY);
 
 	void SetTexture(CTexture::Texture_Type textType) { m_textType = textType; }
 
 	const D3DXVECTOR3& GetPos() const { return m_pos; }
+	const D3DXVECTOR3& GetPosOld() const { return m_posOld; }
 	const D3DXVECTOR3& GetRot() const { return m_rot; }
 	const D3DXVECTOR2& GetSize() const { return m_size; }
+	const bool& GetCollision() const { return m_bCollision; }
 
 	static CObject_2D* Create(D3DXVECTOR3 pos, D3DXVECTOR2 size);
 
@@ -64,6 +69,7 @@ private:
 
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	// Bufferオブジェクト
 	D3DXVECTOR3 m_pos;					// 位置
+	D3DXVECTOR3 m_posOld;				// 前回位置
 	D3DXVECTOR3 m_rot;					// 角度
 	D3DXVECTOR2 m_size;					// 拡大量
 	float m_fAngle;						// 角度(アークタンジェント)
@@ -73,6 +79,8 @@ private:
 	int m_nAnimControl;					// 画像アニメーションの制御
 	int m_nAnimColumnDiv;				// 画像アニメーションの列区分
 	int m_nAnimLineDiv;					// 画像アニメーションの行区分
+
+	bool m_bCollision;					// 当たり判定
 
 	CTexture::Texture_Type m_textType;	// テキストタイプ
 };
