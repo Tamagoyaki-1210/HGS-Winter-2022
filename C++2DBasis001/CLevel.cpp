@@ -57,7 +57,7 @@ bool CLevel::LoadMapFile(const char* file_path)
 				break;
 
 			case 3:
-				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (BlockSize * nCntMapW), m_BlockHeight + (BlockSize * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::THORN);
+				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (BlockSize * nCntMapW), m_BlockHeight + (BlockSize * nCntMapH) + 10.0f, 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::THORN);
 				break;
 			case 4:
 				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (BlockSize * nCntMapW), m_BlockHeight + (BlockSize * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::UPBLOCK);
