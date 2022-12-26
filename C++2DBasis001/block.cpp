@@ -73,8 +73,17 @@ void CBlock::Update()
 	CPlayer* pPlayer = CGame::GetPlayer();
 
 	//// 使用例
-	//pos = pPlayer->GetPos();
-	//m_move = pPlayer->GetMove();
+	D3DXVECTOR3 PlayerPos = pPlayer->GetPos();
+
+	if (PlayerPos.x == 640.0f|| PlayerPos.x == 100.f)
+		
+	{
+		m_move.x = -pPlayer->GetMove().x;
+	}
+    else
+    {
+		m_move = D3DXVECTOR3(0.f, 0.f, 0.f);
+    }
 
 	//位置更新
 	pos += m_move;
