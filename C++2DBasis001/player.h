@@ -18,6 +18,14 @@
 class CPlayer : public CObject_2D
 {
 public:
+	enum Player_Motion
+	{
+		MOTION_NONE,
+		MOTION_WARK,
+		MOTION_JUMP,
+		MOTION_MAX
+	};
+
 
 	CPlayer();
 	CPlayer(const int nPriority);
@@ -42,6 +50,7 @@ private:
 	float		m_fMoveSpeed;	// 移動速度
 	bool		m_bCollision;	// 接触判定
 	bool		m_bJump;		// ジャンプ判定
+	Player_Motion m_motion;		// モーション
 };
 
 #endif // !_PLAYER_H_
