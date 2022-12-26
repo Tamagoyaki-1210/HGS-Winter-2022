@@ -21,8 +21,13 @@ public:
 	enum Texture_Type
 	{
 		TEXTURE_NULL = 0,
-		TEXTURE_JAPANESE,	// 日本語フォント
-		TEXTURE_NUMBER,		// 数字フォント
+		TEXTURE_JAPANESE,			//日本語フォント
+		TEXTURE_NUMBER,				//数字フォント
+		TEXTURE_PLAYER,				//プレイヤー
+		TEXTURE_STAGE_GOAL,			//ゴール
+		TEXTURE_STAGE_BLOCK,		//ブロック
+		TEXTURE_STAGE_NEEDLEBALL,	//棘ボール
+		TEXTURE_STAGE_GRASS,		//草の生えた地面
 		TEXTURE_MAX
 	};
 
