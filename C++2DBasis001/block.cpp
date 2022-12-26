@@ -85,8 +85,8 @@ void CBlock::Update()
 		m_move = D3DXVECTOR3(0.f, 0.f, 0.f);
     }
 
-    switch (m_type)
-    {
+	switch (m_type)
+	{
 	case DOWNBLOCK:
 		if (m_IsCollision)
 		{
@@ -105,7 +105,15 @@ void CBlock::Update()
 			CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
 		}
 		break;
-    }
+	case BlockType::GOAL:
+		if (m_IsCollision)
+		{
+			CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
+		}
+		break;
+	default:
+		break;
+	}
 
 	//ˆÊ’uXV
 	pos += m_move;
