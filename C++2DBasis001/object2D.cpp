@@ -48,6 +48,7 @@ HRESULT CObject_2D::Init()
     m_nAnimControl = 0;
 
 	m_bCollision = false;
+	m_bGround = false;
 
     // アニメーションの区分の初期化(1 * 1)
     m_nAnimColumnDiv = 1;
@@ -202,6 +203,7 @@ D3DXVECTOR3 CObject_2D::Collision(CObject* obj)
 		if (fLow > fUppObst && fLowOld <= fUppObstOld)
 		{
 			flipPos = D3DXVECTOR3(pos.x, fUppObst - size.y, 0.0f);
+			m_bGround = true;
 		}
 	}
 
