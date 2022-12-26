@@ -75,10 +75,7 @@ void CGame::Update()
 //=====================================
 void CGame::Input()
 {
-    if (CApplication::GetInstance()->GetInput()->KeyDown(DIK_RETURN, true))
-    {
-		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
-    }
+
 }
 
 //=====================================
