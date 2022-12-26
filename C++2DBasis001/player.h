@@ -31,6 +31,8 @@ public:
 	void Input();
 	void PlayerCollision();
 
+	const D3DXVECTOR3& GetMove() const { return m_move; }
+
 	static CPlayer* Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size);
 private:
 	const float Fast_Player_Speed = 1.0f;
