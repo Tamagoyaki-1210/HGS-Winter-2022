@@ -123,7 +123,7 @@ void CPlayer::Input()
 	//プレイヤー移動
 	if (pInput->KeyDown(DIK_D))
 	{//右移動
-		if (pInput->KeyDown(DIK_W, true) && GetGround())
+		if (pInput->KeyDown(DIK_SPACE, true) && GetGround())
 		{//上移動
 			m_move += NormalizeLength(1.0f, -1);
 			m_move.y -= Jump_Power;
@@ -133,7 +133,7 @@ void CPlayer::Input()
 	}
 	else if (pInput->KeyDown(DIK_A))
 	{//左移動
-		if (pInput->KeyDown(DIK_W, true) && GetGround())
+		if (pInput->KeyDown(DIK_SPACE, true) && GetGround())
 		{//上移動
 			m_move += NormalizeLength(-1.0f, -1);
 			m_move.y -= Jump_Power;
@@ -141,7 +141,7 @@ void CPlayer::Input()
 		}
 		m_move.x += -1.0f;
 	}
-	else if (pInput->KeyDown(DIK_W, true) && GetGround())
+	else if (pInput->KeyDown(DIK_SPACE, true) && GetGround())
 	{//上移動
 		m_move += NormalizeLength(0.0f, -1);
 		m_move.y -= Jump_Power;
