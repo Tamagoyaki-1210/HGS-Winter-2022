@@ -98,6 +98,7 @@ void CBlock::Update()
 		{
 			m_move.y = -2.0f;
 		}
+		break;
 	case THORN:
 		if (m_IsCollision)
 		{
