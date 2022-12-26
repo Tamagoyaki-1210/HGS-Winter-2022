@@ -128,6 +128,7 @@ void CPlayer::Input()
 		{//上移動
 			m_move += NormalizeLength(1.0f, -1);
 			m_move.y -= Jump_Power;
+			CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
 			SetGround(false);
 		}
 		m_move.x += 1.0f;
@@ -137,6 +138,7 @@ void CPlayer::Input()
 		if (pInput->KeyDown(DIK_SPACE, true) && GetGround())
 		{//上移動
 			m_move += NormalizeLength(-1.0f, -1);
+			CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
 			m_move.y -= Jump_Power;
 			SetGround(false);
 		}
@@ -146,6 +148,7 @@ void CPlayer::Input()
 	{//上移動
 		m_move += NormalizeLength(0.0f, -1);
 		m_move.y -= Jump_Power;
+		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
 		SetGround(false);
 	}
 }
@@ -189,6 +192,7 @@ void CPlayer::PlayerCollision()
 					&& fUpp < fLowSub && fLow > fUppSub)
 				{
 					SetPos(Collision(pObject));
+					pObject->SetIsCollision(true);
 				}
 			}
 			// 現在位置ポインタに次回ポインタを代入する(ポインタを進める処理)

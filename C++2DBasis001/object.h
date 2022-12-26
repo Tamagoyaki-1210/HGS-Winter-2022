@@ -54,7 +54,13 @@ public:
 	CObject* GetNext() { return m_pNext; }
 	CObject* GetTop() { return m_pTop[PRIORITY_CENTER]; }
 
+	void SetIsCollision(bool IsCollision) { m_IsCollision = IsCollision; }
+
+protected:
+	bool m_IsCollision;
+
 private:
+
 	int m_nPriority;								// 描画順
 	bool m_bDeath;									// 死亡フラグの判定
 	static CObject* m_pTop[PRIORITY_MAX];			// 先頭オブジェクトへのポインタ
