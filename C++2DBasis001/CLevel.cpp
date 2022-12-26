@@ -3,9 +3,8 @@
 #include "block.h"
 
 CLevel::CLevel()
+    : m_BlockHeight(BlockSize / 2.f), m_BlockWidth(BlockSize / 2.f)
 {
-    m_BlockWidth = BlockSize / 2;
-    m_BlockHeight = BlockSize / 2;
 }
 
 CLevel::~CLevel()
