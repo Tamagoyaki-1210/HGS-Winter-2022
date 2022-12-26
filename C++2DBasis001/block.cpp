@@ -64,6 +64,18 @@ void CBlock::Update()
 	CObject_2D::Update();
 
 	SetUV();
+
+	// 位置取得
+	D3DXVECTOR3 pos = CObject_2D::GetPos();
+
+	//減衰
+	m_move -= m_move * 0.15f;
+
+	//位置更新
+	pos += m_move;
+
+	//位置設定処理
+	CObject_2D::SetPos(pos);
 }
 
 //=====================================

@@ -42,6 +42,7 @@ public:
 	static CBlock* Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, const BlockType type);
 private:
 	BlockType m_type;
+	D3DXVECTOR3 m_move;			// ˆÚ“®—Ê
 };
 
 #endif // !_PLAYER_H_

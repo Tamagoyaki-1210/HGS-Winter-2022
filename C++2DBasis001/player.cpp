@@ -49,6 +49,7 @@ HRESULT CPlayer::Init()
 	m_fMoveSpeed = Fast_Player_Speed;
 
 	m_bCollision = false;
+	m_bJump = false;
 
 	return S_OK;
 }
@@ -107,41 +108,19 @@ void CPlayer::Input()
 	//プレイヤー移動
 	if (pInput->KeyDown(DIK_D))
 	{//右移動
-		if (pInput->KeyDown(DIK_S))
-		{//下移動
-			m_move += NormalizeLength(1.0f, 1.0f);
-		}
-		else if (pInput->KeyDown(DIK_W))
+		if (pInput->KeyDown(DIK_W))
 		{//上移動
 			m_move += NormalizeLength(1.0f, -1.0f);
 		}
-		else
-		{
-			m_move.x += 1.0f;
-		}
+		m_move.x += 1.0f;
 	}
 	else if (pInput->KeyDown(DIK_A))
 	{//左移動
-		if (pInput->KeyDown(DIK_S))
-		{//下移動
-			m_move += NormalizeLength(-1.0f, 1.0f);
-		}
-		else if (pInput->KeyDown(DIK_W))
+		if (pInput->KeyDown(DIK_W))
 		{//上移動
 			m_move += NormalizeLength(-1.0f, -1.0f);
 		}
-		else
-		{
-			m_move.x += -1.0f;
-		}
-	}
-	else if(pInput->KeyDown(DIK_S))
-	{//下移動
-		m_move.y += 1.0f;
-	}
-	else if(pInput->KeyDown(DIK_W))
-	{//上移動
-		m_move.y += -1.0f;
+		m_move.x += -1.0f;
 	}
 }
 

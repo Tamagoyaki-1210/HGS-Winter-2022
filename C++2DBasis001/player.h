@@ -38,6 +38,7 @@ private:
 	D3DXVECTOR3 m_move;			// ˆÚ“®—Ê
 	float		m_fMoveSpeed;	// ˆÚ“®‘¬“x
 	bool		m_bCollision;	// ÚG”»’è
+	bool		m_bJump;		// ƒWƒƒƒ“ƒv”»’è
 };
 
 #endif // !_PLAYER_H_
