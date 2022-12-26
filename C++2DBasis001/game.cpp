@@ -6,7 +6,7 @@
 //=============================================================================
 #include "game.h"
 #include "application.h"
-#include "object2D.h"
+#include "player.h"
 #include "fontString.h"
 //#include "inputKeyboard.h"
 #include "DirectInput.h"
@@ -34,9 +34,11 @@ HRESULT CGame::Init()
 {
 	CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_BGM_GAME);
 
-    CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100, 100));
+    CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(60, 60));
 
     CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ゲーム");
+
+
 
     return S_OK;
 }
@@ -62,12 +64,6 @@ void CGame::Update()
 //=====================================
 void CGame::Input()
 {
-    //// Pでポーズ切り替え
-    //if (CInputKeyboard::GetKeyboardTrigger(DIK_RETURN))
-    //{
-    //    g_pApplication->SetMode(g_pApplication->Mode_Result);
-    //}
-
     if (CApplication::GetInstance()->GetInput()->KeyDown(DIK_RETURN, true))
     {
 		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);

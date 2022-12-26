@@ -29,6 +29,9 @@
     <Filter Include="プログラムファイル\03_Object\Object2D\Font">
       <UniqueIdentifier>{5c692cb2-9b46-40be-af5b-9aed8e692bb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="プログラムファイル\03_Object\Object2D\Player">
+      <UniqueIdentifier>{e333ffd0-1064-4cce-811c-9f176194117a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="title.cpp">
@@ -84,6 +87,12 @@
     </ClCompile>
     <ClCompile Include="DirectInput.cpp">
       <Filter>プログラムファイル\02_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>プログラムファイル\03_Object\Object2D\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="matrix.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +152,12 @@
     </ClInclude>
     <ClInclude Include="InputInterface.h">
       <Filter>プログラムファイル\02_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>プログラムファイル\03_Object\Object2D\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
