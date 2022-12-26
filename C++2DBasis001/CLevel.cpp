@@ -1,6 +1,6 @@
 #include "CLevel.h"
 #include "cstdio"
-
+#include "block.h"
 
 CLevel::CLevel(int BlockHeight, int BlockWidth)
     :m_BlockHeight(BlockHeight), m_BlockWidth(BlockWidth)
@@ -48,7 +48,7 @@ bool CLevel::LoadMapFile(const char* file_path)
             {
             //ブロックの設置	
             case 0:
-
+				CBlock::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100.0f, 0.0f), D3DXVECTOR2(300, 60));
                 break;
 
             case 1:
