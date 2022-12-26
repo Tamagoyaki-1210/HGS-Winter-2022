@@ -41,7 +41,7 @@ HRESULT CTitle::Init()
 
     m_pvObj2D.push_back(pObj2D);
 
-    CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(60.0f, 60.0f), "リバースグラビティ");
+	CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(60.0f, 60.0f), "リバースグラビティ");
     return S_OK;
 }
 
