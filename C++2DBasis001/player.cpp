@@ -83,14 +83,15 @@ void CPlayer::Update()
 	//位置更新
 	pos += m_move;
 
-	if (pos.x <= 100.0f)
+	if (pos.x < 100.0f)
 	{
 		pos.x = 100.0f;
 	}
-	else if (pos.x >= 700.0f)
+	else if (pos.x > 640.0f)
 	{
-		pos.x = 700.0f;
+		pos.x = 640.0f;
 	}
+
 
 	//位置設定処理
 	CObject_2D::SetPos(pos);
