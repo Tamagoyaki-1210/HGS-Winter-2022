@@ -46,6 +46,9 @@ private:
 	const float Fast_Player_Speed = 1.0f;
 	const float Jump_Power = 40.0f;
 
+	float m_gravity = 1.0f;
+	bool m_IsGravityReversal = true;
+
 	D3DXVECTOR3 m_move;			// ˆÚ“®—Ê
 	float		m_fMoveSpeed;	// ˆÚ“®‘¬“x
 	bool		m_bCollision;	// ÚG”»’è

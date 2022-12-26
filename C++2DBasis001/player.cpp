@@ -77,7 +77,7 @@ void CPlayer::Update()
 	if (!GetGround())
 	{
 		// d—Í
-		m_move.y += 1.0f;
+		m_move.y += m_gravity;
 	}
 
 	// “ü—Íˆ—
@@ -141,6 +141,12 @@ void CPlayer::Input()
 		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
 		SetGround(false);
 		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
+	}
+
+	if (pInput->KeyDown(DIK_G, true) && m_IsGravityReversal)
+	{//d—Í”½“]
+		m_gravity = -m_gravity;
+		m_IsGravityReversal = false;
 	}
 }
 
