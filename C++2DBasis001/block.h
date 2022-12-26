@@ -28,8 +28,6 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	void Input();
-
 	static CBlock* Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size);
 private:
 
