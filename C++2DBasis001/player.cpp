@@ -9,6 +9,7 @@
 #include "texture.h"
 #include "DirectInput.h"
 #include "matrix.h"
+#include"texture.h"
 
 //=====================================
 // デフォルトコンストラクタ
@@ -156,6 +157,7 @@ CPlayer *CPlayer::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
 
 	pPlayer->SetPos(pos);
 	pPlayer->SetSize(size);
+	pPlayer->SetTexture(CTexture::TEXTURE_PLAYER);
 
 	return pPlayer;
 }

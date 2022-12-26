@@ -23,6 +23,7 @@ public:
 		TEXTURE_NULL = 0,
 		TEXTURE_JAPANESE,	// 日本語フォント
 		TEXTURE_NUMBER,		// 数字フォント
+		TEXTURE_PLAYER,		// プレイヤー
 		TEXTURE_MAX
 	};
 

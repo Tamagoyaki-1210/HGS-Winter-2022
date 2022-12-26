@@ -17,6 +17,7 @@ char* CTexture::m_pTexturePass[TEXTURE_MAX] =
 
     "data\\TEXTURE\\Font\\Japanese2000unicode.png",
     "data\\TEXTURE\\Number\\number000.png",
+	"data\\TEXTURE\\Player\\astronaut.png",
 
 };
 
