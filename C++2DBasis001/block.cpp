@@ -94,7 +94,7 @@ CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, const Bloc
 	{
 	case BlockType::NORMAL:
 	{
-		pBlock->SetTexture(CTexture::TEXTURE_NULL);
+		CTexture::TextureClear();
 		break;
 	}
 	case BlockType::BLOCK:
@@ -104,22 +104,27 @@ CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, const Bloc
 	}
 	case BlockType::GOAL:
 	{
+		pBlock->SetTexture(CTexture::TEXTURE_GOAL);
 		break;
 	}
 	case BlockType::THORN:
 	{
+		pBlock->SetTexture(CTexture::TEXTURE_THRON);
 		break;
 	}
 	case BlockType::UPBLOCK:
 	{
+		pBlock->SetTexture(CTexture::TEXTURE_UPBLOCK);
 		break;
 	}
 	case BlockType::DOWNBLOCK:
 	{
+		pBlock->SetTexture(CTexture::TEXTURE_DOWNBLOCK);
 		break;
 	}
 	case BlockType::WOODCRATE:
 	{
+		pBlock->SetTexture(CTexture::TEXTURE_WOODCRATE);
 		break;
 	}
 	default:
