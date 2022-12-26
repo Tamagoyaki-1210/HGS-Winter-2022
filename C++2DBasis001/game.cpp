@@ -13,6 +13,7 @@
 #include "score.h"
 #include "CLevel.h"
 
+CPlayer* CGame::m_pPlayer = nullptr;
 //=====================================
 // デフォルトコンストラクタ
 //=====================================
@@ -36,7 +37,7 @@ HRESULT CGame::Init()
 {
 	CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_BGM_GAME);
 
-    CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(60, 60));
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(60, 60));
 
     CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ゲーム");
 

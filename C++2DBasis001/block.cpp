@@ -9,6 +9,8 @@
 #include "texture.h"
 #include "DirectInput.h"
 #include "matrix.h"
+#include "game.h"
+#include "player.h"
 
 //=====================================
 // デフォルトコンストラクタ
@@ -68,8 +70,11 @@ void CBlock::Update()
 	// 位置取得
 	D3DXVECTOR3 pos = CObject_2D::GetPos();
 
-	//減衰
-	m_move -= m_move * 0.15f;
+	CPlayer* pPlayer = CGame::GetPlayer();
+
+	//// 使用例
+	//pos = pPlayer->GetPos();
+	//m_move = pPlayer->GetMove();
 
 	//位置更新
 	pos += m_move;

@@ -12,6 +12,7 @@
 //*****************************************************************************
 #include "mode.h"
 
+class CPlayer;
 class CLevel;
 
 //---------------------------
@@ -29,10 +30,12 @@ public:
 
 	void Input();
 
+	static CPlayer* GetPlayer() { return m_pPlayer; }
+
 	static CGame* Create();
 private:
 	CLevel* m_pLevel;
-
+	static CPlayer* m_pPlayer;
 };
 
 #endif // !_GAME_H_
