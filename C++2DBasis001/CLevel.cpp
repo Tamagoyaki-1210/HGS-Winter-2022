@@ -2,7 +2,7 @@
 #include "cstdio"
 #include "block.h"
 
-CLevel::CLevel(int BlockHeight, int BlockWidth)
+CLevel::CLevel(float BlockHeight, float BlockWidth)
     :m_BlockHeight(BlockHeight), m_BlockWidth(BlockWidth)
 {
 }
@@ -48,7 +48,7 @@ bool CLevel::LoadMapFile(const char* file_path)
             {
             //ブロックの設置	
             case 0:
-				CBlock::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100.0f, 0.0f), D3DXVECTOR2(300, 60));
+				CBlock::Create(D3DXVECTOR3(m_BlockWidth+m_BlockWidth * nCntMapW,m_BlockHeight+m_BlockHeight* nCntMapH,0.f), D3DXVECTOR2(m_BlockWidth*2, m_BlockHeight*2));
                 break;
 
             case 1:
