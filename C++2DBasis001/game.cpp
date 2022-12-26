@@ -8,8 +8,8 @@
 #include "application.h"
 #include "player.h"
 #include "fontString.h"
-//#include "inputKeyboard.h"
 #include "DirectInput.h"
+#include "block.h"
 
 //=====================================
 // デフォルトコンストラクタ
@@ -38,7 +38,7 @@ HRESULT CGame::Init()
 
     CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ゲーム");
 
-
+	CBlock::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100.0f, 0.0f), D3DXVECTOR2(300, 60));
 
     return S_OK;
 }

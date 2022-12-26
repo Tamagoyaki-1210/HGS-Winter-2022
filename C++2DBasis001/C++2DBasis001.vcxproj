@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="block.cpp" />
     <ClCompile Include="debugProc.cpp" />
     <ClCompile Include="DirectInput.cpp" />
     <ClCompile Include="fade.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
+    <ClInclude Include="block.h" />
     <ClInclude Include="debugProc.h" />
     <ClInclude Include="DirectInput.h" />
     <ClInclude Include="fade.h" />
