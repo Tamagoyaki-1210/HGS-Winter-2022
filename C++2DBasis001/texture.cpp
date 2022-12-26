@@ -18,10 +18,11 @@ char* CTexture::m_pTexturePass[TEXTURE_MAX] =
     "data\\TEXTURE\\Font\\Japanese2000unicode.png",	//日本語フォント
     "data\\TEXTURE\\Number\\number000.png",			//数字フォント
 	"data\\TEXTURE\\Player\\astronaut.png",			//プレイヤー
-	"data\\TEXTURE\\Gimmick\\goal.png",				//ゴール
-	"data\\TEXTURE\\Gimmick\\Block.png",			//ブロック
-	"data\\TEXTURE\\Gimmick\\togeball.png",			//棘ボール
-	"data\\TEXTURE\\Gimmick\\grass.png"				//草の生えた地面
+	"data\\TEXTURE\\Gimmick\\goal_2.png",				//ゴール
+	"data\\TEXTURE\\Gimmick\\Block_1.png",			//ブロック
+	"data\\TEXTURE\\Gimmick\\thorn_3.png",			//棘ボール
+	"data\\TEXTURE\\Gimmick\\upblock_4.png"				//草の生えた地面
+	"data\\TEXTURE\\Gimmick\\downblock_5.png"				//草の生えた地面
 };
 
 //=====================================
