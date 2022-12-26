@@ -173,7 +173,7 @@ void CPlayer::Input()
 		}
 	}
 
-    if (pInput->KeyDown(DIK_G, true) && GetGround())
+    if (pInput->KeyDown(DIK_RETURN, true) && GetGround())
 	{//èdóÕîΩì]
 		m_fGravity = -m_fGravity;
 		m_bGravity = !m_bGravity;

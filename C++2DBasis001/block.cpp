@@ -105,7 +105,7 @@ void CBlock::Update()
 			CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
 		}
 		break;
-	case BlockType::GOAL:
+	case GOAL:
 		if (m_IsCollision)
 		{
 			CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
