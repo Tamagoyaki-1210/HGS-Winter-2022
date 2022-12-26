@@ -94,10 +94,12 @@ CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, const Bloc
 	{
 	case BlockType::NORMAL:
 	{
+		pBlock->SetTexture(CTexture::TEXTURE_NULL);
 		break;
 	}
 	case BlockType::BLOCK:
 	{
+		pBlock->SetTexture(CTexture::TEXTURE_BLOCK);
 		break;
 	}
 	case BlockType::GOAL:
