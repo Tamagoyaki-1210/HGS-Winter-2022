@@ -14,7 +14,7 @@ public:
     bool LoadMapFile(const char* file_path);
   
 private:
-    int m_BlockArray[HeightMax - 1][WidthMax - 1];
+    int m_BlockArray[HeightMax][WidthMax];
 
     float m_BlockHeight{},m_BlockWidth{};
 };
