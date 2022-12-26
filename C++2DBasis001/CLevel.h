@@ -4,7 +4,7 @@
 constexpr float BlockSize = 40.f;
 
 constexpr int HeightMax = 16;
-constexpr int WidthMax = 128;
+constexpr int WidthMax = 160;
 
 class CLevel
 {

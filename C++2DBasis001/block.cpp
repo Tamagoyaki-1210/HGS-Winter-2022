@@ -126,7 +126,10 @@ CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, const Bloc
 		break;
 	}
 
-	pBlock->SetCollision(true);
+	if (type != BlockType::NORMAL)
+	{
+		pBlock->SetCollision(true);
+	}
 
 	return pBlock;
 }

@@ -11,6 +11,7 @@
 #include "DirectInput.h"
 #include "block.h"
 #include "score.h"
+#include "CLevel.h"
 
 //=====================================
 // デフォルトコンストラクタ
@@ -46,6 +47,9 @@ HRESULT CGame::Init()
 	CScore* pScore = CScore::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 12, 0.0f), D3DXVECTOR2(10.0f, 20.0f));
 	pScore->AddScore(12345609);
 
+	m_pLevel = new CLevel;
+	m_pLevel->LoadMapFile("data\\MAP\\map.txt");
+
     return S_OK;
 }
 
@@ -54,7 +58,7 @@ HRESULT CGame::Init()
 //=====================================
 void CGame::Uninit()
 {
-
+	delete m_pLevel;
 }
 
 //=====================================
