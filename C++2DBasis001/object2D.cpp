@@ -413,6 +413,8 @@ void CObject_2D::SetAnimDiv(int nDivX, int nDivY)
 {
     m_nAnimColumnDiv = nDivX;
     m_nAnimLineDiv = nDivY;
+
+	SetAnimControl(0, 0);
 }
 
 //=====================================

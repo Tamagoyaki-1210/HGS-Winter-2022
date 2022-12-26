@@ -21,15 +21,16 @@ public:
 	enum Texture_Type
 	{
 		TEXTURE_NULL = 0,
-		TEXTURE_JAPANESE,			//日本語フォント
-		TEXTURE_NUMBER,				//数字フォント
-		TEXTURE_PLAYER,				//プレイヤー
+		TEXTURE_JAPANESE,		//日本語フォント
+		TEXTURE_NUMBER,			//数字フォント
+		TEXTURE_PLAYER,			//プレイヤー
 		TEXTURE_GOAL,			//ゴール
-		TEXTURE_BLOCK,		//ブロック
-		TEXTURE_THRON,		//草の生えた地面
-		TEXTURE_UPBLOCK,		//草の生えた地面
-		TEXTURE_DOWNBLOCK,		//草の生えた地面
-		TEXTURE_WOODCRATE,		//草の生えた地面
+		TEXTURE_BLOCK,			//ブロック
+		TEXTURE_THRON,			//棘
+		TEXTURE_UPBLOCK,		//上ブロック
+		TEXTURE_DOWNBLOCK,		//下ブロック
+		TEXTURE_WOODCRATE,		//木箱
+		TEXTURE_SPACEBG,		//宇宙の背景
 		TEXTURE_MAX
 	};
 
