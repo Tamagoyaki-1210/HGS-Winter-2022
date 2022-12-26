@@ -49,6 +49,7 @@ HRESULT CPlayer::Init()
 	m_fMoveSpeed = Fast_Player_Speed;
 
 	m_bCollision = false;
+	m_bJump = false;
 
 	return S_OK;
 }
@@ -77,10 +78,19 @@ void CPlayer::Update()
 	Input();
 
 	//減衰
-	m_move -= m_move * 0.15f;
+	m_move -= m_move * 0.15f * m_fMoveSpeed;
 
 	//位置更新
-	pos += m_move * m_fMoveSpeed;
+	pos += m_move;
+
+	if (pos.x <= 100.0f)
+	{
+		pos.x = 100.0f;
+	}
+	else if (pos.x >= 700.0f)
+	{
+		pos.x = 700.0f;
+	}
 
 	//位置設定処理
 	CObject_2D::SetPos(pos);
@@ -107,41 +117,19 @@ void CPlayer::Input()
 	//プレイヤー移動
 	if (pInput->KeyDown(DIK_D))
 	{//右移動
-		if (pInput->KeyDown(DIK_S))
-		{//下移動
-			m_move += NormalizeLength(1.0f, 1.0f);
-		}
-		else if (pInput->KeyDown(DIK_W))
+		if (pInput->KeyDown(DIK_W))
 		{//上移動
 			m_move += NormalizeLength(1.0f, -1.0f);
 		}
-		else
-		{
-			m_move.x += 1.0f;
-		}
+		m_move.x += 1.0f;
 	}
 	else if (pInput->KeyDown(DIK_A))
 	{//左移動
-		if (pInput->KeyDown(DIK_S))
-		{//下移動
-			m_move += NormalizeLength(-1.0f, 1.0f);
-		}
-		else if (pInput->KeyDown(DIK_W))
+		if (pInput->KeyDown(DIK_W))
 		{//上移動
 			m_move += NormalizeLength(-1.0f, -1.0f);
 		}
-		else
-		{
-			m_move.x += -1.0f;
-		}
-	}
-	else if(pInput->KeyDown(DIK_S))
-	{//下移動
-		m_move.y += 1.0f;
-	}
-	else if(pInput->KeyDown(DIK_W))
-	{//上移動
-		m_move.y += -1.0f;
+		m_move.x += -1.0f;
 	}
 }
 
