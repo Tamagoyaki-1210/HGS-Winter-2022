@@ -74,6 +74,12 @@ void CPlayer::Update()
 	// 位置取得
 	D3DXVECTOR3 pos = CObject_2D::GetPos();
 
+	if (!GetGround())
+	{
+		// 重力
+		m_move.y += 1.0f;
+	}
+
 	// 入力処理
 	Input();
 
@@ -108,19 +114,29 @@ void CPlayer::Input()
 	//プレイヤー移動
 	if (pInput->KeyDown(DIK_D))
 	{//右移動
-		if (pInput->KeyDown(DIK_W))
+		if (pInput->KeyDown(DIK_W, true) && GetGround())
 		{//上移動
-			m_move += NormalizeLength(1.0f, -1.0f);
+			m_move += NormalizeLength(1.0f, -1);
+			m_move.y -= Jump_Power;
+			SetGround(false);
 		}
 		m_move.x += 1.0f;
 	}
 	else if (pInput->KeyDown(DIK_A))
 	{//左移動
-		if (pInput->KeyDown(DIK_W))
+		if (pInput->KeyDown(DIK_W, true) && GetGround())
 		{//上移動
-			m_move += NormalizeLength(-1.0f, -1.0f);
+			m_move += NormalizeLength(-1.0f, -1);
+			m_move.y -= Jump_Power;
+			SetGround(false);
 		}
 		m_move.x += -1.0f;
+	}
+	else if (pInput->KeyDown(DIK_W, true) && GetGround())
+	{//上移動
+		m_move += NormalizeLength(0.0f, -1);
+		m_move.y -= Jump_Power;
+		SetGround(false);
 	}
 }
 
@@ -130,6 +146,8 @@ void CPlayer::Input()
 void CPlayer::PlayerCollision()
 {
 	CObject *pCenter = CObject::GetTop();	//オブジェクトの先頭ポインタ
+
+	SetGround(false);
 
 	if (pCenter != nullptr)
 	{

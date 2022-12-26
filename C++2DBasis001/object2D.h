@@ -52,6 +52,7 @@ public:
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
 	void SetCollision(bool collision) { m_bCollision = collision; }
+	void SetGround(bool ground) { m_bGround = ground; }
 	void SetSize(const D3DXVECTOR2 size);
 	void SetAnimDiv(int nDivX, int nDivY);
 
@@ -62,6 +63,7 @@ public:
 	const D3DXVECTOR3& GetRot() const { return m_rot; }
 	const D3DXVECTOR2& GetSize() const { return m_size; }
 	const bool& GetCollision() const { return m_bCollision; }
+	const bool& GetGround() const { return m_bGround; }
 
 	static CObject_2D* Create(D3DXVECTOR3 pos, D3DXVECTOR2 size);
 
@@ -81,6 +83,7 @@ private:
 	int m_nAnimLineDiv;					// 画像アニメーションの行区分
 
 	bool m_bCollision;					// 当たり判定
+	bool m_bGround;						// 設置判定
 
 	CTexture::Texture_Type m_textType;	// テキストタイプ
 };
