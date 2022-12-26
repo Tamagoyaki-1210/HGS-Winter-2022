@@ -35,8 +35,8 @@ HRESULT CTitle::Init()
 
     CObject_2D* pObj2D = nullptr;
 
-    pObj2D = CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100.0f, 100.0f));
-    pObj2D->SetTexture((CTexture::Texture_Type)0);
+    pObj2D = CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0.0f), D3DXVECTOR2(12800.0f, 720.0f));
+    pObj2D->SetTexture((CTexture::TEXTURE_SPACEBG));
     m_pvObj2D.push_back(pObj2D);
 
     pObj2D = CObject_2D::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100.0f, 100.0f));
