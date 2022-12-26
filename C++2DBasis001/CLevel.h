@@ -1,7 +1,7 @@
 #pragma once
 constexpr float BlockSize = 40.f;
 
-constexpr int HeightMax = 16;
+constexpr int HeightMax = 18;
 constexpr int WidthMax = 160;
 
 class CLevel
