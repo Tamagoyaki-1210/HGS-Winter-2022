@@ -18,6 +18,7 @@ CSound::SOUNDPARAM CSound::g_aParam[SOUND_LABEL_MAX] =
 
 	{ "data/SOUNDS/SE/‘I‘ð/‘I‘ðSE.wav", 0 },
 	{ "data/SOUNDS/SE/Œˆ’è/Œˆ’èSE.wav", 0 },
+	{ "data/SOUNDS/SE/Player/jump.wav",0 },
 };
 
 //=============================================================================
