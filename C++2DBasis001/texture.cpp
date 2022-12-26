@@ -21,9 +21,9 @@ char* CTexture::m_pTexturePass[TEXTURE_MAX] =
 	"data\\TEXTURE\\Gimmick\\goal_2.png",				//ゴール
 	"data\\TEXTURE\\Gimmick\\Block_1.png",			//ブロック
 	"data\\TEXTURE\\Gimmick\\thorn_3.png",			//棘ボール
-	"data\\TEXTURE\\Gimmick\\upblock_4.png"				//草の生えた地面
-	"data\\TEXTURE\\Gimmick\\downblock_5.png"				//草の生えた地面
-	"data\\TEXTURE\\Gimmick\\woodcrate_6.png"				//草の生えた地面
+	"data\\TEXTURE\\Gimmick\\upblock_4.png",				//草の生えた地面
+	"data\\TEXTURE\\Gimmick\\downblock_5.png",				//草の生えた地面
+	"data\\TEXTURE\\Gimmick\\woodcrate_6.png",				//草の生えた地面
 
 };
 
