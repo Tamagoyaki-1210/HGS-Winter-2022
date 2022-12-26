@@ -22,6 +22,6 @@ public:
 private:
     int m_BlockArray[HeightMax][WidthMax];
 
-    constexpr int m_BlockHeight{},m_BlockWidth{};
+    int m_BlockHeight{},m_BlockWidth{};
 };
 

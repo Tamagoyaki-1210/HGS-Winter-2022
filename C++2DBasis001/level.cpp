@@ -47,11 +47,11 @@ bool level::LoadMapFile(const char* file_path)
             switch (m_BlockArray[nCntMapH][nCntMapW])
             {
             //ブロックの設置	
-            case BlockType::NORMAL:
+            case 0:
 
                 break;
 
-            case BlockType::BLOCK:
+            case 1:
                 break;
 
             default:
