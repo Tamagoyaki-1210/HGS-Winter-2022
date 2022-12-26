@@ -31,6 +31,7 @@ public:
 		TEXTURE_DOWNBLOCK,		//下ブロック
 		TEXTURE_WOODCRATE,		//木箱
 		TEXTURE_SPACEBG,		//宇宙の背景
+		TEXTURE_BG,				//ゲームの背景
 		TEXTURE_MAX
 	};
 
