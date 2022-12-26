@@ -48,7 +48,8 @@ private:
 	const float Jump_Power = 40.0f;
 
 	float m_gravity = 1.0f;
-
+	int m_nFrame;
+	int m_nSave;
 	D3DXVECTOR3 m_move;			// ˆÚ“®—Ê
 	int			m_nFrame;		// ƒtƒŒ[ƒ€
 	int			m_nSave;		// §Œä

@@ -98,6 +98,11 @@ void CBlock::Update()
 		{
 			m_move.y = -2.0f;
 		}
+	case THORN:
+		if (m_IsCollision)
+		{
+			CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
+		}
 		break;
     }
 

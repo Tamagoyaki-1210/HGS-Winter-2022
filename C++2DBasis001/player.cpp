@@ -108,6 +108,10 @@ void CPlayer::Update()
 	{
 		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
 	}
+	else if (pos.y < -200.0f)
+	{
+		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
+	}
 
 	//ˆÊ’uİ’èˆ—
 	CObject_2D::SetPos(pos);
