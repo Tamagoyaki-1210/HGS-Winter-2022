@@ -8,6 +8,11 @@ enum class BlockType
 {
     NORMAL,
     BLOCK,
+	GOAL,
+	THORN,
+	UPBLOCK,
+	DOWNBLOCK,
+	WOODCRATE
 };
 
 class CLevel
