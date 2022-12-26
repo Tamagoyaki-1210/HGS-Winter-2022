@@ -49,7 +49,9 @@ HRESULT CPlayer::Init()
 	m_fMoveSpeed = Fast_Player_Speed;
 
 	m_bCollision = false;
-	m_bJump = false;
+
+	m_nFrame = 0;
+	m_nSave = 0;
 
 	return S_OK;
 }
@@ -83,6 +85,9 @@ void CPlayer::Update()
 	// 入力処理
 	Input();
 
+	// モーション処理
+	Motion();
+
 	//減衰
 	m_move -= m_move * 0.15f * m_fMoveSpeed;
 
@@ -98,6 +103,11 @@ void CPlayer::Update()
 		pos.x = 640.0f;
 	}
 
+	// プレイヤー落下処理
+	if (pos.y > SCREEN_HEIGHT + 200.0f)
+	{
+		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
+	}
 
 	//位置設定処理
 	CObject_2D::SetPos(pos);
@@ -124,32 +134,101 @@ void CPlayer::Input()
 	//プレイヤー移動
 	if (pInput->KeyDown(DIK_D))
 	{//右移動
-		if (pInput->KeyDown(DIK_SPACE, true) && GetGround())
-		{//上移動
-			m_move += NormalizeLength(1.0f, -1);
-			m_move.y -= Jump_Power;
-			CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
-			SetGround(false);
-		}
 		m_move.x += 1.0f;
+		if (m_motion != MOTION_WARK && GetGround())
+		{
+			m_motion = MOTION_WARK;
+		}
 	}
 	else if (pInput->KeyDown(DIK_A))
 	{//左移動
-		if (pInput->KeyDown(DIK_SPACE, true) && GetGround())
-		{//上移動
-			m_move += NormalizeLength(-1.0f, -1);
-			CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
-			m_move.y -= Jump_Power;
-			SetGround(false);
-		}
 		m_move.x += -1.0f;
+		if (m_motion != MOTION_WARK && GetGround())
+		{
+			m_motion = MOTION_WARK;
+		}
 	}
-	else if (pInput->KeyDown(DIK_SPACE, true) && GetGround())
+	else if (m_motion == MOTION_WARK && GetGround())
+	{
+		m_motion = MOTION_NONE;
+	}
+
+	if ((pInput->KeyDown(DIK_W, true) || pInput->KeyDown(DIK_SPACE, true)) && GetGround())
 	{//上移動
-		m_move += NormalizeLength(0.0f, -1);
 		m_move.y -= Jump_Power;
 		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
 		SetGround(false);
+		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
+		if (m_motion != MOTION_JUMP)
+		{
+			m_motion = MOTION_JUMP;
+		}
+	}
+}
+
+//=====================================
+// モーション処理
+//=====================================
+void CPlayer::Motion()
+{
+	switch (m_motion)
+	{
+	case CPlayer::MOTION_NONE:
+	{
+		SetAnimControl(0);
+		if (m_nFrame != 0 || m_nSave != 0)
+		{
+			m_nFrame = 0;
+			m_nSave = 0;
+		}
+		break;
+	}
+	case CPlayer::MOTION_WARK:
+	{
+		SetAnimControl(m_nFrame, 0);
+		// フレームカウント処理
+		if (m_nSave > 2)
+		{
+			if (m_nFrame < 4)
+			{
+				m_nFrame++;
+			}
+			else
+			{
+				m_nFrame = 0;
+			}
+			m_nSave = 0;
+		}
+		else
+		{
+			m_nSave++;
+		}
+		break;
+	}
+	case CPlayer::MOTION_JUMP:
+	{
+		SetAnimControl(m_nFrame, 1);
+		if (m_nSave > 2)
+		{
+			// フレームカウント処理
+			if (m_nFrame < 4)
+			{
+				m_nFrame++;
+			}
+			else
+			{
+				m_nFrame = 4;
+			}
+			m_nSave = 0;
+		}
+		else
+		{
+			m_nSave++;
+		}
+		break;
+	}
+	default:
+		break;
 	}
 }
 
@@ -160,7 +239,14 @@ void CPlayer::PlayerCollision()
 {
 	CObject *pCenter = CObject::GetTop();	//オブジェクトの先頭ポインタ
 
-	SetGround(false);
+	if (GetGround())
+	{
+		SetGround(false);
+		if (m_motion == MOTION_JUMP)
+		{
+			m_motion = MOTION_NONE;
+		}
+	}
 
 	if (pCenter != nullptr)
 	{
@@ -192,6 +278,7 @@ void CPlayer::PlayerCollision()
 					&& fUpp < fLowSub && fLow > fUppSub)
 				{
 					SetPos(Collision(pObject));
+					pObject->SetIsCollision(true);
 				}
 			}
 			// 現在位置ポインタに次回ポインタを代入する(ポインタを進める処理)
@@ -215,6 +302,7 @@ CPlayer *CPlayer::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
 	pPlayer->SetPos(pos);
 	pPlayer->SetSize(size);
 	pPlayer->SetTexture(CTexture::TEXTURE_PLAYER);
+	pPlayer->SetAnimDiv(4, 2);
 
 	pPlayer->SetCollision(true);
 

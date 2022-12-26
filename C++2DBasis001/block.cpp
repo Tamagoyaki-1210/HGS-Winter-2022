@@ -85,6 +85,22 @@ void CBlock::Update()
 		m_move = D3DXVECTOR3(0.f, 0.f, 0.f);
     }
 
+    switch (m_type)
+    {
+	case DOWNBLOCK:
+		if (m_IsCollision)
+		{
+			m_move.y = 2.0f;
+		}
+		break;
+	case UPBLOCK:
+		if (m_IsCollision)
+		{
+			m_move.y = -2.0f;
+		}
+		break;
+    }
+
 	//à íuçXêV
 	pos += m_move;
 
