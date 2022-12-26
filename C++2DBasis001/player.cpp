@@ -50,8 +50,10 @@ HRESULT CPlayer::Init()
 
 	m_bCollision = false;
 
+	m_bGravity = false;
 	m_nFrame = 0;
 	m_nSave = 0;
+	m_fGravity = 1.f;
 
 	return S_OK;
 }
@@ -79,7 +81,7 @@ void CPlayer::Update()
 	if (!GetGround())
 	{
 		// èdóÕ
-		m_move.y += m_gravity;
+		m_move.y += m_fGravity;
 	}
 
 	// ì¸óÕèàóù
@@ -159,7 +161,9 @@ void CPlayer::Input()
 
 	if ((pInput->KeyDown(DIK_W, true) || pInput->KeyDown(DIK_SPACE, true)) && GetGround())
 	{//è„à⁄ìÆ
-		m_move.y -= Jump_Power;
+		if (!m_bGravity) m_move.y -= Jump_Power;
+		else m_move.y += Jump_Power;
+
 		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
 		SetGround(false);
 		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
@@ -171,7 +175,12 @@ void CPlayer::Input()
 
     if (pInput->KeyDown(DIK_G, true) && GetGround())
 	{//èdóÕîΩì]
-		m_gravity = -m_gravity;
+		m_fGravity = -m_fGravity;
+		m_bGravity = !m_bGravity;
+
+		if (!m_bGravity) m_move.y += 10.f;
+		else m_move.y -= 10.f;
+
 	}
 }
 
