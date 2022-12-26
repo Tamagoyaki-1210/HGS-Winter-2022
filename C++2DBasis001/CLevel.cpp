@@ -2,13 +2,14 @@
 #include "cstdio"
 #include "block.h"
 
-CLevel::CLevel(float BlockHeight, float BlockWidth)
-    :m_BlockHeight(BlockHeight), m_BlockWidth(BlockWidth)
+CLevel::CLevel()
+    : m_BlockHeight(BlockSize / 2.f), m_BlockWidth(BlockSize / 2.f)
 {
 }
 
 CLevel::~CLevel()
 {
+	delete m_BlockArray;
 }
 
 bool CLevel::LoadMapFile(const char* file_path)
@@ -48,12 +49,31 @@ bool CLevel::LoadMapFile(const char* file_path)
             {
             //ブロックの設置	
             case 0:
-				CBlock::Create(D3DXVECTOR3(m_BlockWidth+m_BlockWidth * nCntMapW,m_BlockHeight+m_BlockHeight* nCntMapH,0.f), D3DXVECTOR2(m_BlockWidth*2, m_BlockHeight*2));
+                CBlock::Create(D3DXVECTOR3(m_BlockWidth + (m_BlockWidth * nCntMapW), m_BlockHeight + (m_BlockHeight * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * , m_BlockHeight * 2), CBlock::NORMAL);
                 break;
 
             case 1:
+				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (m_BlockWidth * nCntMapW), m_BlockHeight + (m_BlockHeight * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::BLOCK);
                 break;
 
+			case 2:
+				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (m_BlockWidth * nCntMapW), m_BlockHeight + (m_BlockHeight * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::GOAL);
+				break;
+
+			case 3:
+				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (m_BlockWidth * nCntMapW), m_BlockHeight + (m_BlockHeight * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::THORN);
+				break;
+			case 4:
+				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (m_BlockWidth * nCntMapW), m_BlockHeight + (m_BlockHeight * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::UPBLOCK);
+				break;
+
+			case 5:
+				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (m_BlockWidth * nCntMapW), m_BlockHeight + (m_BlockHeight * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::DOWNBLOCK);
+				break;
+
+			case 6:
+				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (m_BlockWidth * nCntMapW), m_BlockHeight + (m_BlockHeight * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::WOODCRATE);
+				break;
             default:
                 break;
             }

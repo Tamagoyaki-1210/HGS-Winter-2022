@@ -77,7 +77,7 @@ void CBlock::Draw()
 //=====================================
 // ¶¬ˆ—
 //=====================================
-CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
+CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, const BlockType type)
 {
 	CBlock* pBlock = new CBlock(PRIORITY_CENTER);
 
@@ -88,8 +88,53 @@ CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
 
 	pBlock->SetPos(pos);
 	pBlock->SetSize(size);
+	pBlock->m_type = type;
 
-	pBlock->SetCollision(true);
+	switch (type)
+	{
+	case BlockType::NORMAL:
+	{
+		CTexture::TextureClear();
+		break;
+	}
+	case BlockType::BLOCK:
+	{
+		pBlock->SetTexture(CTexture::TEXTURE_BLOCK);
+		break;
+	}
+	case BlockType::GOAL:
+	{
+		pBlock->SetTexture(CTexture::TEXTURE_GOAL);
+		break;
+	}
+	case BlockType::THORN:
+	{
+		pBlock->SetTexture(CTexture::TEXTURE_THRON);
+		break;
+	}
+	case BlockType::UPBLOCK:
+	{
+		pBlock->SetTexture(CTexture::TEXTURE_UPBLOCK);
+		break;
+	}
+	case BlockType::DOWNBLOCK:
+	{
+		pBlock->SetTexture(CTexture::TEXTURE_DOWNBLOCK);
+		break;
+	}
+	case BlockType::WOODCRATE:
+	{
+		pBlock->SetTexture(CTexture::TEXTURE_WOODCRATE);
+		break;
+	}
+	default:
+		break;
+	}
+
+	if (type != BlockType::NORMAL)
+	{
+		pBlock->SetCollision(true);
+	}
 
 	return pBlock;
 }

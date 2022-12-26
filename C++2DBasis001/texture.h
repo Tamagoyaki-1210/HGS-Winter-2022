@@ -24,10 +24,13 @@ public:
 		TEXTURE_JAPANESE,			//日本語フォント
 		TEXTURE_NUMBER,				//数字フォント
 		TEXTURE_PLAYER,				//プレイヤー
-		TEXTURE_STAGE_GOAL,			//ゴール
-		TEXTURE_STAGE_BLOCK,		//ブロック
-		TEXTURE_STAGE_NEEDLEBALL,	//棘ボール
-		TEXTURE_STAGE_GRASS,		//草の生えた地面
+		TEXTURE_GOAL,			//ゴール
+		TEXTURE_BLOCK,		//ブロック
+		TEXTURE_NEEDLEBALL,	//棘ボール
+		TEXTURE_THRON,		//草の生えた地面
+		TEXTURE_UPBLOCK,		//草の生えた地面
+		TEXTURE_DOWNBLOCK,		//草の生えた地面
+		TEXTURE_WOODCRATE,		//草の生えた地面
 		TEXTURE_MAX
 	};
 
