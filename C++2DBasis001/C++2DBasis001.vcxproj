@@ -160,7 +160,7 @@
     <ClCompile Include="font.cpp" />
     <ClCompile Include="fontString.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="level.cpp" />
+    <ClCompile Include="CLevel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix.cpp" />
     <ClCompile Include="mode.cpp" />
@@ -185,7 +185,7 @@
     <ClInclude Include="fontString.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="InputInterface.h" />
-    <ClInclude Include="level.h" />
+    <ClInclude Include="CLevel.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="matrix.h" />
     <ClInclude Include="mode.h" />

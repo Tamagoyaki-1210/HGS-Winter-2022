@@ -38,6 +38,7 @@ CObject_2D::~CObject_2D()
 HRESULT CObject_2D::Init()
 {
     m_pos = Vec3Null;
+	m_posOld = Vec3Null;
     m_rot = Vec3Null;
     m_size = Vec2Null;
 
@@ -45,6 +46,8 @@ HRESULT CObject_2D::Init()
     m_nAnimColumn = 0;
     m_nAnimLine = 0;
     m_nAnimControl = 0;
+
+	m_bCollision = false;
 
     // アニメーションの区分の初期化(1 * 1)
     m_nAnimColumnDiv = 1;
@@ -112,7 +115,8 @@ void CObject_2D::Uninit()
 //=====================================
 void CObject_2D::Update()
 {
-
+	// 前回位置の取得
+	m_posOld = m_pos;
 }
 
 //=====================================
@@ -136,6 +140,72 @@ void CObject_2D::Draw()
 
     // テクスチャの解放処理
     CTexture::TextureClear();
+}
+
+//=====================================
+// 当たり判定処理
+//=====================================
+D3DXVECTOR3 CObject_2D::Collision(CObject* obj)
+{
+	D3DXVECTOR3 flipPos = Vec3Null;
+
+	// 当たり判定が使用中の場合
+	if (obj != nullptr)
+	{
+		// 現在位置ポインタに先頭ポインタを代入
+		CObject* pObject = obj;
+
+		D3DXVECTOR3 pos = CObject_2D::GetPos();
+		D3DXVECTOR3 posOld = CObject_2D::GetPosOld();
+		D3DXVECTOR2 size = CObject_2D::GetSize();
+
+		float fLeft = pos.x - (size.x / 2);				// P四角形左側
+		float fRight = pos.x + (size.x / 2);			// P四角形右側
+		float fUpp = pos.y - (size.y / 2);				// P四角形上側
+		float fLow = pos.y + (size.y / 2);				// P四角形下側
+
+		float fLeftOld = posOld.x - (size.x / 2);			// P前回四角形左側
+		float fRightOld = posOld.x + (size.x / 2);			// P前回四角形右側
+		float fUppOld = posOld.y - (size.y / 2);			// P前回四角形上側
+		float fLowOld = posOld.y + (size.y / 2);			// P前回四角形下側
+
+		D3DXVECTOR3 posSub = pObject->GetPos();
+		D3DXVECTOR3 posOldSub = pObject->GetPosOld();
+		D3DXVECTOR2 sizeSub = pObject->GetSize();
+
+		float fLeftObst = posSub.x - (sizeSub.x / 2);			// O四角形左側
+		float fRightObst = posSub.x + (sizeSub.x / 2);			// O四角形右側
+		float fUppObst = posSub.y - (sizeSub.y / 2);			// O四角形上側
+		float fLowObst = posSub.y + (sizeSub.y / 2);			// O四角形下側
+
+		float fLeftObstOld = posOldSub.x - (sizeSub.x / 2);		// O前回四角形左側
+		float fRightObstOld = posOldSub.x + (sizeSub.x / 2);	// O前回四角形右側
+		float fUppObstOld = posOldSub.y - (sizeSub.y / 2);		// O前回四角形上側
+		float fLowObstOld = posOldSub.y + (sizeSub.y / 2);		// O前回四角形下側
+
+		//P左側当たり判定　P左側がO右側より左に在る場合
+		if (fLeft < fRightObst && fLeftOld >= fRightObstOld)
+		{
+			flipPos = D3DXVECTOR3(fRightObst + (size.x / 2), pos.y, 0.0f);
+		}
+		//P右側当たり判定 P右側がO左側より右に在る場合
+		if (fRight > fLeftObst && fRightOld <= fLeftObstOld)
+		{
+			flipPos = D3DXVECTOR3(fLeftObst - (size.x / 2), pos.y, 0.0f);
+		}
+		//P上側当たり判定 P上側がO下側より上に在る場合
+		if (fUpp < fLowObst && fUppOld >= fLowObstOld)
+		{
+			flipPos = D3DXVECTOR3(pos.x, fLowObst + (size.y / 2), 0.0f);
+		}
+		//P下側当たり判定 P下側がO上側より下に在る場合
+		if (fLow > fUppObst && fLowOld <= fUppObstOld)
+		{
+			flipPos = D3DXVECTOR3(pos.x, fUppObst - (size.y / 2), 0.0f);
+		}
+	}
+
+	return flipPos;
 }
 
 //=====================================

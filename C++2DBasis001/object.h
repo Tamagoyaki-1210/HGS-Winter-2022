@@ -45,7 +45,14 @@ public:
 
 	void SetPriority(int nPriority);				// •`‰æ‡‚Ìİ’èˆ—
 
-	CObject** GetTop() { return &m_pTop[0]; }
+	virtual const D3DXVECTOR3& GetPos() const = 0;
+	virtual const D3DXVECTOR3& GetPosOld() const = 0;
+	virtual const D3DXVECTOR3& GetRot() const = 0;
+	virtual const D3DXVECTOR2& GetSize() const = 0;
+	virtual const bool& GetCollision() const = 0;
+
+	CObject* GetNext() { return m_pNext; }
+	CObject* GetTop() { return m_pTop[PRIORITY_CENTER]; }
 
 private:
 	int m_nPriority;								// •`‰æ‡

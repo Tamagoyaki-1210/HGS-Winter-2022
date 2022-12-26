@@ -29,14 +29,15 @@ public:
 	void Draw() override;
 
 	void Input();
+	void PlayerCollision();
 
 	static CPlayer* Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size);
 private:
 	const float Fast_Player_Speed = 1.0f;
 
-	D3DXVECTOR3 m_posOld;		// ‘O‰ñˆÊ’u
 	D3DXVECTOR3 m_move;			// ˆÚ“®—Ê
 	float		m_fMoveSpeed;	// ˆÚ“®‘¬“x
+	bool		m_bCollision;	// ÚG”»’è
 };
 
 #endif // !_PLAYER_H_

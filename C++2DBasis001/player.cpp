@@ -48,6 +48,8 @@ HRESULT CPlayer::Init()
 
 	m_fMoveSpeed = Fast_Player_Speed;
 
+	m_bCollision = false;
+
 	return S_OK;
 }
 
@@ -69,10 +71,7 @@ void CPlayer::Update()
 	SetUV();
 
 	// 位置取得
-	D3DXVECTOR3 pos = GetPos();
-
-	// 前回位置の取得
-	m_posOld = pos;
+	D3DXVECTOR3 pos = CObject_2D::GetPos();
 
 	// 入力処理
 	Input();
@@ -84,7 +83,10 @@ void CPlayer::Update()
 	pos += m_move * m_fMoveSpeed;
 
 	//位置設定処理
-	SetPos(pos);
+	CObject_2D::SetPos(pos);
+
+	// 当たり判定の処理
+	PlayerCollision();
 }
 
 //=====================================
@@ -144,6 +146,51 @@ void CPlayer::Input()
 }
 
 //=====================================
+// 当たり判定処理
+//=====================================
+void CPlayer::PlayerCollision()
+{
+	CObject *pCenter = CObject::GetTop();	//オブジェクトの先頭ポインタ
+
+	if (pCenter != nullptr)
+	{
+		//現在位置ポインタに先頭ポインタを代入
+		CObject *pObject = pCenter;
+
+		//現在位置ポインタが使用中の場合
+		while (pObject != nullptr)
+		{
+			if (pObject->GetCollision() == true && pObject != this)
+			{
+				D3DXVECTOR3 pos = GetPos();
+				D3DXVECTOR2 size = GetSize();
+
+				D3DXVECTOR3 posSub = pObject->GetPos();
+				D3DXVECTOR2 sizeSub = pObject->GetSize();
+
+				float fLeft = pos.x - (size.x / 2);		//四角形左側
+				float fRight = pos.x + (size.x / 2);	//四角形右側
+				float fUpp = pos.y - (size.y / 2);		//四角形上側
+				float fLow = pos.y + (size.y / 2);		//四角形下側
+
+				float fLeftSub = posSub.x - (sizeSub.x / 2);	//四角形左側
+				float fRightSub = posSub.x + (sizeSub.x / 2);	//四角形右側
+				float fUppSub = posSub.y - (sizeSub.y / 2);		//四角形上側
+				float fLowSub = posSub.y + (sizeSub.y / 2);		//四角形下側
+
+				if (fLeft < fRightSub && fRight > fLeftSub
+					&& fUpp < fLowSub && fLow > fUppSub)
+				{
+					SetPos(Collision(pObject));
+				}
+			}
+			// 現在位置ポインタに次回ポインタを代入する(ポインタを進める処理)
+			pObject = pObject->GetNext();
+		}
+	}
+}
+
+//=====================================
 // 生成処理
 //=====================================
 CPlayer *CPlayer::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
@@ -158,6 +205,8 @@ CPlayer *CPlayer::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
 	pPlayer->SetPos(pos);
 	pPlayer->SetSize(size);
 	pPlayer->SetTexture(CTexture::TEXTURE_PLAYER);
+
+	pPlayer->SetCollision(true);
 
 	return pPlayer;
 }

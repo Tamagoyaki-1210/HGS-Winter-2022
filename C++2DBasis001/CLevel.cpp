@@ -1,17 +1,17 @@
-#include "level.h"
+#include "CLevel.h"
 #include "cstdio"
 
 
-level::level(int BlockHeight, int BlockWidth)
+CLevel::CLevel(int BlockHeight, int BlockWidth)
     :m_BlockHeight(BlockHeight), m_BlockWidth(BlockWidth)
 {
 }
 
-level::~level()
+CLevel::~CLevel()
 {
 }
 
-bool level::LoadMapFile(const char* file_path)
+bool CLevel::LoadMapFile(const char* file_path)
 {
     //ファイルを読み込みモードで開く
     FILE* pFile = fopen(file_path, "r");
