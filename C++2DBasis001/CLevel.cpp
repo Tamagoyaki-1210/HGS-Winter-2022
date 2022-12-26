@@ -48,10 +48,6 @@ bool CLevel::LoadMapFile(const char* file_path)
             switch (m_BlockArray[nCntMapH][nCntMapW])
             {
             //ブロックの設置	
-            case 0:
-               // CBlock::Create(D3DXVECTOR3(m_BlockWidth + (BlockSize * nCntMapW), m_BlockHeight + (BlockSize * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::NORMAL);
-                break;
-
             case 1:
 				CBlock::Create(D3DXVECTOR3(m_BlockWidth + (BlockSize * nCntMapW), m_BlockHeight + (BlockSize * nCntMapH), 0.f), D3DXVECTOR2(m_BlockWidth * 2, m_BlockHeight * 2), CBlock::BLOCK);
                 break;

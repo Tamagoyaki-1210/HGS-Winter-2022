@@ -163,20 +163,20 @@ void CPlayer::PlayerCollision()
 			if (pObject->GetCollision() == true && pObject != this)
 			{
 				D3DXVECTOR3 pos = GetPos();
-				D3DXVECTOR2 size = GetSize();
+				D3DXVECTOR2 size = (GetSize() / 2);
 
 				D3DXVECTOR3 posSub = pObject->GetPos();
-				D3DXVECTOR2 sizeSub = pObject->GetSize();
+				D3DXVECTOR2 sizeSub = (pObject->GetSize() / 2);
 
-				float fLeft = pos.x - (size.x / 2);		//四角形左側
-				float fRight = pos.x + (size.x / 2);	//四角形右側
-				float fUpp = pos.y - (size.y / 2);		//四角形上側
-				float fLow = pos.y + (size.y / 2);		//四角形下側
+				float fLeft = pos.x - size.x;			//四角形左側
+				float fRight = pos.x + size.x;			//四角形右側
+				float fUpp = pos.y - size.y;			//四角形上側
+				float fLow = pos.y + size.y;			//四角形下側
 
-				float fLeftSub = posSub.x - (sizeSub.x / 2);	//四角形左側
-				float fRightSub = posSub.x + (sizeSub.x / 2);	//四角形右側
-				float fUppSub = posSub.y - (sizeSub.y / 2);		//四角形上側
-				float fLowSub = posSub.y + (sizeSub.y / 2);		//四角形下側
+				float fLeftSub = posSub.x - sizeSub.x;	//四角形左側
+				float fRightSub = posSub.x + sizeSub.x;	//四角形右側
+				float fUppSub = posSub.y - sizeSub.y;	//四角形上側
+				float fLowSub = posSub.y + sizeSub.y;	//四角形下側
 
 				if (fLeft < fRightSub && fRight > fLeftSub
 					&& fUpp < fLowSub && fLow > fUppSub)

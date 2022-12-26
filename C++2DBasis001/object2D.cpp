@@ -157,51 +157,51 @@ D3DXVECTOR3 CObject_2D::Collision(CObject* obj)
 
 		D3DXVECTOR3 pos = CObject_2D::GetPos();
 		D3DXVECTOR3 posOld = CObject_2D::GetPosOld();
-		D3DXVECTOR2 size = CObject_2D::GetSize();
+		D3DXVECTOR2 size = (CObject_2D::GetSize() / 2);
 
-		float fLeft = pos.x - (size.x / 2);				// P四角形左側
-		float fRight = pos.x + (size.x / 2);			// P四角形右側
-		float fUpp = pos.y - (size.y / 2);				// P四角形上側
-		float fLow = pos.y + (size.y / 2);				// P四角形下側
+		float fLeft = pos.x - size.x;				// P四角形左側
+		float fRight = pos.x + size.x;			// P四角形右側
+		float fUpp = pos.y - size.y;				// P四角形上側
+		float fLow = pos.y + size.y;				// P四角形下側
 
-		float fLeftOld = posOld.x - (size.x / 2);			// P前回四角形左側
-		float fRightOld = posOld.x + (size.x / 2);			// P前回四角形右側
-		float fUppOld = posOld.y - (size.y / 2);			// P前回四角形上側
-		float fLowOld = posOld.y + (size.y / 2);			// P前回四角形下側
+		float fLeftOld = posOld.x - size.x;			// P前回四角形左側
+		float fRightOld = posOld.x + size.x;			// P前回四角形右側
+		float fUppOld = posOld.y - size.y;			// P前回四角形上側
+		float fLowOld = posOld.y + size.y;			// P前回四角形下側
 
 		D3DXVECTOR3 posSub = pObject->GetPos();
 		D3DXVECTOR3 posOldSub = pObject->GetPosOld();
-		D3DXVECTOR2 sizeSub = pObject->GetSize();
+		D3DXVECTOR2 sizeSub = (pObject->GetSize() / 2);
 
-		float fLeftObst = posSub.x - (sizeSub.x / 2);			// O四角形左側
-		float fRightObst = posSub.x + (sizeSub.x / 2);			// O四角形右側
-		float fUppObst = posSub.y - (sizeSub.y / 2);			// O四角形上側
-		float fLowObst = posSub.y + (sizeSub.y / 2);			// O四角形下側
+		float fLeftObst = posSub.x - sizeSub.x;			// O四角形左側
+		float fRightObst = posSub.x + sizeSub.x;			// O四角形右側
+		float fUppObst = posSub.y - sizeSub.y;			// O四角形上側
+		float fLowObst = posSub.y + sizeSub.y;			// O四角形下側
 
-		float fLeftObstOld = posOldSub.x - (sizeSub.x / 2);		// O前回四角形左側
-		float fRightObstOld = posOldSub.x + (sizeSub.x / 2);	// O前回四角形右側
-		float fUppObstOld = posOldSub.y - (sizeSub.y / 2);		// O前回四角形上側
-		float fLowObstOld = posOldSub.y + (sizeSub.y / 2);		// O前回四角形下側
+		float fLeftObstOld = posOldSub.x - sizeSub.x;		// O前回四角形左側
+		float fRightObstOld = posOldSub.x + sizeSub.x;	// O前回四角形右側
+		float fUppObstOld = posOldSub.y - sizeSub.y;		// O前回四角形上側
+		float fLowObstOld = posOldSub.y + sizeSub.y;		// O前回四角形下側
 
 		//P左側当たり判定　P左側がO右側より左に在る場合
 		if (fLeft < fRightObst && fLeftOld >= fRightObstOld)
 		{
-			flipPos = D3DXVECTOR3(fRightObst + (size.x / 2), pos.y, 0.0f);
+			flipPos = D3DXVECTOR3(fRightObst + size.x, pos.y, 0.0f);
 		}
 		//P右側当たり判定 P右側がO左側より右に在る場合
 		if (fRight > fLeftObst && fRightOld <= fLeftObstOld)
 		{
-			flipPos = D3DXVECTOR3(fLeftObst - (size.x / 2), pos.y, 0.0f);
+			flipPos = D3DXVECTOR3(fLeftObst - size.x, pos.y, 0.0f);
 		}
 		//P上側当たり判定 P上側がO下側より上に在る場合
 		if (fUpp < fLowObst && fUppOld >= fLowObstOld)
 		{
-			flipPos = D3DXVECTOR3(pos.x, fLowObst + (size.y / 2), 0.0f);
+			flipPos = D3DXVECTOR3(pos.x, fLowObst + size.y, 0.0f);
 		}
 		//P下側当たり判定 P下側がO上側より下に在る場合
 		if (fLow > fUppObst && fLowOld <= fUppObstOld)
 		{
-			flipPos = D3DXVECTOR3(pos.x, fUppObst - (size.y / 2), 0.0f);
+			flipPos = D3DXVECTOR3(pos.x, fUppObst - size.y, 0.0f);
 		}
 	}
 
@@ -218,7 +218,7 @@ void CObject_2D::SetUV()
     // 頂点バッファをロックし、頂点情報へのポインタを取得
     m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-    float fLength = sqrtf((powf(m_size.x, 2) + powf(m_size.y, 2)) / 2);
+    float fLength = sqrtf((powf(m_size.x, 2) + powf(m_size.y, 2))) / 2;
 
     // 頂点情報を設定
     pVtx[0].pos.x = m_pos.x - sinf(m_fAngle + m_rot.x) * fLength;
