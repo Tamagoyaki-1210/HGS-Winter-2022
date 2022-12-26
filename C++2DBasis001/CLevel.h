@@ -1,6 +1,4 @@
 #pragma once
-#include <string>
-
 constexpr float BlockSize = 40.f;
 
 constexpr int HeightMax = 16;
