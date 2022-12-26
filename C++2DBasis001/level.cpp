@@ -11,10 +11,10 @@ level::~level()
 {
 }
 
-bool level::LoadMapFile(const std::string& file_path)
+bool level::LoadMapFile(const char* file_path)
 {
     //ファイルを読み込みモードで開く
-    FILE* pFile = fopen(file_path.c_str(), "r");
+    FILE* pFile = fopen(file_path, "r");
 
     if (pFile != nullptr)
     {

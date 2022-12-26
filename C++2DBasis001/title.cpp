@@ -9,7 +9,6 @@
 #include "object2D.h"
 #include "fontString.h"
 #include "DirectInput.h"
-#include "score.h"
 
 //=====================================
 // デフォルトコンストラクタ
@@ -44,10 +43,6 @@ HRESULT CTitle::Init()
     m_pvObj2D.push_back(pObj2D);
 
     CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80.0f, 80.0f), "タイトル");
-
-    CScore* pScore = CScore::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 12, 0.0f), D3DXVECTOR2(10.0f, 20.0f));
-    pScore->AddScore(12345609);
-
     return S_OK;
 }
 
