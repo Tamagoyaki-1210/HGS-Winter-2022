@@ -32,6 +32,7 @@ public:
 		TEXTURE_WOODCRATE,		//–Ø” 
 		TEXTURE_SPACEBG,		//‰F’ˆ‚Ì”wŒi
 		TEXTURE_BG,				//ƒQ[ƒ€‚Ì”wŒi
+		TEXTURE_TUTORIAL,
 		TEXTURE_MAX
 	};
 

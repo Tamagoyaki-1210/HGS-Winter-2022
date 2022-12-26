@@ -26,6 +26,7 @@ char* CTexture::m_pTexturePass[TEXTURE_MAX] =
 	"data\\TEXTURE\\Gimmick\\woodcrate_6.png",		//木箱
 	"data\\TEXTURE\\Bg\\space.png",					//宇宙の背景
 	"data\\TEXTURE\\Bg\\bg.jpg",					//宇宙の背景
+	"data\\TEXTURE\\Gimmick\\Tutorial.png",
 };
 
 //=====================================
