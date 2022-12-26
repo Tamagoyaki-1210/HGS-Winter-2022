@@ -77,7 +77,7 @@ void CBlock::Draw()
 //=====================================
 // ¶¬ˆ—
 //=====================================
-CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
+CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, const BlockType type)
 {
 	CBlock* pBlock = new CBlock(PRIORITY_CENTER);
 
@@ -88,6 +88,41 @@ CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
 
 	pBlock->SetPos(pos);
 	pBlock->SetSize(size);
+	pBlock->m_type = type;
+
+	switch (type)
+	{
+	case BlockType::NORMAL:
+	{
+		break;
+	}
+	case BlockType::BLOCK:
+	{
+		break;
+	}
+	case BlockType::GOAL:
+	{
+		break;
+	}
+	case BlockType::THORN:
+	{
+		break;
+	}
+	case BlockType::UPBLOCK:
+	{
+		break;
+	}
+	case BlockType::DOWNBLOCK:
+	{
+		break;
+	}
+	case BlockType::WOODCRATE:
+	{
+		break;
+	}
+	default:
+		break;
+	}
 
 	pBlock->SetCollision(true);
 
