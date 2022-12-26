@@ -14,7 +14,5 @@
 
 float Normalize(float val);
 D3DXVECTOR3 NormalizeLength(float valX, float valY);
-bool CollisionCircle(D3DXVECTOR3 pos, float fLength, D3DXVECTOR3 posSub, float fLengthSub);		//‰~Œ^“–‚½‚è”»’èŒvZˆ—
-bool CollisionSquare(D3DXVECTOR3 pos, D3DXVECTOR3 posSub, float fWidth, float fHeight, float fWidthSub, float fHeightSub);	//lŠpŒ`“–‚½‚è”»’èŒvZˆ—
 
 #endif // !_MATRIX_H_
