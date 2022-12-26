@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-constexpr int HeightMax = 11;
+constexpr int HeightMax = 10;
 constexpr int WidthMax = 100;
 
 enum class BlockType
@@ -11,21 +11,22 @@ enum class BlockType
 	GOAL,
 	THORN,
 	UPBLOCK,
-	DOWNBLOCK
+	DOWNBLOCK,
+	WOODCRATE
 };
 
 class CLevel
 {
 public:
 
-    CLevel(int BlockHeight, int BlockWidth);
+    CLevel(float BlockHeight, float BlockWidth);
     ~CLevel();
 
     bool LoadMapFile(const char* file_path);
   
 private:
-    int m_BlockArray[HeightMax][WidthMax];
+    int m_BlockArray[HeightMax - 1][WidthMax - 1];
 
-    int m_BlockHeight{},m_BlockWidth{};
+    float m_BlockHeight{},m_BlockWidth{};
 };
 
