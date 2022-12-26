@@ -139,6 +139,7 @@ void CPlayer::Input()
 	{//ãˆÚ“®
 		m_move.y -= Jump_Power;
 		SetGround(false);
+		CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_SE_JUMP);
 	}
 }
 
