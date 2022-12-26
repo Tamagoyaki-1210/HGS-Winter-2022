@@ -11,7 +11,8 @@ enum class BlockType
 	GOAL,
 	THORN,
 	UPBLOCK,
-	DOWNBLOCK
+	DOWNBLOCK,
+	WOODCRATE
 };
 
 class CLevel
