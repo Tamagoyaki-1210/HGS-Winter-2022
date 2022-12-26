@@ -79,7 +79,7 @@ void CPlayer::Update()
 	if (!GetGround())
 	{
 		// èdóÕ
-		m_move.y += 1.0f;
+		m_move.y += m_gravity;
 	}
 
 	// ì¸óÕèàóù
@@ -164,6 +164,12 @@ void CPlayer::Input()
 			m_motion = MOTION_JUMP;
 		}
 	}
+
+    if (pInput->KeyDown(DIK_G, true) && m_IsGravityReversal)
+	{//èdóÕîΩì]
+		m_gravity = -m_gravity;
+		m_IsGravityReversal = false;
+	}
 }
 
 //=====================================
@@ -230,6 +236,8 @@ void CPlayer::Motion()
 	default:
 		break;
 	}
+
+
 }
 
 //=====================================
