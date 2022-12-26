@@ -88,6 +88,9 @@
     <ClCompile Include="DirectInput.cpp">
       <Filter>プログラムファイル\02_Input</Filter>
     </ClCompile>
+    <ClCompile Include="level.cpp">
+      <Filter>プログラムファイル\00_Basis</Filter>
+    </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>プログラムファイル\03_Object\Object2D\Player</Filter>
     </ClCompile>
@@ -155,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="InputInterface.h">
       <Filter>プログラムファイル\02_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="level.h">
+      <Filter>プログラムファイル\00_Basis</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>プログラムファイル\03_Object\Object2D\Player</Filter>
