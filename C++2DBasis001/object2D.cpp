@@ -124,22 +124,22 @@ void CObject_2D::Update()
 //=====================================
 void CObject_2D::Draw()
 {
-    LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
+	LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
 
-    // 頂点バッファをデータストリームに設定
-    pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
+	// 頂点バッファをデータストリームに設定
+	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
 
-    // 頂点フォーマットの設定
-    pDevice->SetFVF(FVF_VERTEX_2D);
+	// 頂点フォーマットの設定
+	pDevice->SetFVF(FVF_VERTEX_2D);
 
-    // テクスチャの設定
-    CTexture::GetTextureType(m_textType);
+	// テクスチャの設定
+	CTexture::GetTextureType(m_textType);
 
-    // ポリゴンの描画
-    pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+	// ポリゴンの描画
+	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-    // テクスチャの解放処理
-    CTexture::TextureClear();
+	// テクスチャの解放処理
+	CTexture::TextureClear();
 }
 
 //=====================================

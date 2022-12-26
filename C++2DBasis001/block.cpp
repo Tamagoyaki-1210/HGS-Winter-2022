@@ -94,7 +94,7 @@ CBlock *CBlock::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, const Bloc
 	{
 	case BlockType::NORMAL:
 	{
-		CTexture::TextureClear();
+		//CTexture::TextureClear();
 		break;
 	}
 	case BlockType::BLOCK:
