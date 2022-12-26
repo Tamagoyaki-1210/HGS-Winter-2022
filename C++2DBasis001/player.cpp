@@ -78,10 +78,19 @@ void CPlayer::Update()
 	Input();
 
 	//減衰
-	m_move -= m_move * 0.15f;
+	m_move -= m_move * 0.15f * m_fMoveSpeed;
 
 	//位置更新
-	pos += m_move * m_fMoveSpeed;
+	pos += m_move;
+
+	if (pos.x <= 100.0f)
+	{
+		pos.x = 100.0f;
+	}
+	else if (pos.x >= 700.0f)
+	{
+		pos.x = 700.0f;
+	}
 
 	//位置設定処理
 	CObject_2D::SetPos(pos);
