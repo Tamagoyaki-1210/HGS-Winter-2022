@@ -12,7 +12,7 @@
 #include "block.h"
 #include "score.h"
 #include "CLevel.h"
-
+#include"object2D.h"
 CPlayer* CGame::m_pPlayer = nullptr;
 //=====================================
 // デフォルトコンストラクタ
@@ -44,9 +44,11 @@ HRESULT CGame::Init()
 	//CBlock::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100.0f, 0.0f), D3DXVECTOR2(300, 60), CBlock::BLOCK);
 
 	//CBlock::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150.0f, 0.0f), D3DXVECTOR2(30, 60), CBlock::NORMAL);
-
+	
 	CScore* pScore = CScore::Create(D3DXVECTOR3((float)SCREEN_WIDTH, SCREEN_HEIGHT / 12, 0.0f), D3DXVECTOR2(10.0f, 20.0f));
 	pScore->AddScore(12345609);
+
+	//CObject_2D* pObj2D = CObject_2D::SetTexture(CTexture::TEXTURE_SPACEBG);
 
 	m_pLevel = new CLevel;
 	m_pLevel->LoadMapFile("data\\MAP\\map.txt");
