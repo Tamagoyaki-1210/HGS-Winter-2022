@@ -49,7 +49,8 @@ private:
 
 	float m_gravity = 1.0f;
 	bool m_IsGravityReversal = true;
-
+	int m_nFrame;
+	int m_nSave;
 	D3DXVECTOR3 m_move;			// ˆÚ“®—Ê
 	float		m_fMoveSpeed;	// ˆÚ“®‘¬“x
 	bool		m_bCollision;	// ÚG”»’è

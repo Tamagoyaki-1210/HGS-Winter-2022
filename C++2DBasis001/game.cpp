@@ -37,7 +37,7 @@ HRESULT CGame::Init()
 {
 	CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_BGM_GAME);
 
-	m_pPlayer = CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(40, 60));
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 8, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(40, 60));
 
     CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "ゲーム");
 
