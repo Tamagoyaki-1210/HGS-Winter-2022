@@ -31,12 +31,14 @@ CTitle::~CTitle()
 //=====================================
 HRESULT CTitle::Init()
 {
+	m_nScrool = 0;
 	CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_BGM_TITLE);
 
     CObject_2D* pObj2D = nullptr;
 
-    pObj2D = CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0.0f), D3DXVECTOR2(12800.0f, 720.0f));
+    pObj2D = CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(12800.0f, 720.0f));
     pObj2D->SetTexture((CTexture::TEXTURE_SPACEBG));
+
     m_pvObj2D.push_back(pObj2D);
 
     CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80.0f, 80.0f), "タイトル");
@@ -57,6 +59,18 @@ void CTitle::Uninit()
 void CTitle::Update()
 {
     Input();
+
+	m_pvObj2D[0]->SetPos(D3DXVECTOR3(m_pvObj2D[0]->GetPos().x + m_nScrool, SCREEN_HEIGHT / 2, 0.0f));
+
+	if (m_pvObj2D[0]->GetPos().x + m_nScrool < 12800.0f - SCREEN_WIDTH / 2)
+	{
+		m_pvObj2D[0]->SetPos(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f));
+		m_nScrool = 0;
+	}
+	else
+	{
+		m_nScrool += 100;
+	}
 }
 
 //=====================================

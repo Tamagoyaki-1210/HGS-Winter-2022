@@ -35,7 +35,7 @@ public:
 
 	static CTitle* Create();
 private:
-
+	int m_nScrool;
 	std::vector<CObject_2D*> m_pvObj2D;
 };
 
