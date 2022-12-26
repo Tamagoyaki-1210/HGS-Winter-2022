@@ -53,8 +53,7 @@ private:
 	D3DXVECTOR3 m_move;			// 移動量
 	float		m_fMoveSpeed;	// 移動速度
 	bool		m_bCollision;	// 接触判定
-	int			m_nFrame;		// モーションフレーム
-	int			m_nSave;			// モーション制御
+	bool		m_bJump;		// ジャンプ判定
 	Player_Motion m_motion;		// モーション
 };
 
