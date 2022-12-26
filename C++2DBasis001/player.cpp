@@ -108,7 +108,7 @@ void CPlayer::Update()
 	{
 		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
 	}
-	else if (pos.y < -200.0f)
+	else if (pos.y < -150.0f)
 	{
 		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
 	}
