@@ -198,6 +198,7 @@ D3DXVECTOR3 CObject_2D::Collision(CObject* obj)
 		if (fUpp < fLowObst && fUppOld >= fLowObstOld)
 		{
 			flipPos = D3DXVECTOR3(pos.x, fLowObst + size.y, 0.0f);
+			m_bGround = true;
 		}
 		//P下側当たり判定 P下側がO上側より下に在る場合
 		if (fLow > fUppObst && fLowOld <= fUppObstOld)

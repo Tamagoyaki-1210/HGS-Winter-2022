@@ -165,10 +165,9 @@ void CPlayer::Input()
 		}
 	}
 
-    if (pInput->KeyDown(DIK_G, true) && m_IsGravityReversal)
+    if (pInput->KeyDown(DIK_G, true) && GetGround())
 	{//d—Í”½“]
 		m_gravity = -m_gravity;
-		m_IsGravityReversal = false;
 	}
 }
 

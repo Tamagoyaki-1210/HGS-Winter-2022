@@ -48,9 +48,10 @@ private:
 	const float Jump_Power = 40.0f;
 
 	float m_gravity = 1.0f;
-	bool m_IsGravityReversal = true;
 
 	D3DXVECTOR3 m_move;			// 移動量
+	int			m_nFrame;		// フレーム
+	int			m_nSave;		// 制御
 	float		m_fMoveSpeed;	// 移動速度
 	bool		m_bCollision;	// 接触判定
 	bool		m_bJump;		// ジャンプ判定
