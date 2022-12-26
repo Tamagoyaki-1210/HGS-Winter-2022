@@ -37,6 +37,7 @@ public:
 	void Draw() override;
 
 	void Input();
+	void Motion();
 	void PlayerCollision();
 
 	const D3DXVECTOR3& GetMove() const { return m_move; }
@@ -46,10 +47,11 @@ private:
 	const float Fast_Player_Speed = 1.0f;
 	const float Jump_Power = 40.0f;
 
-	D3DXVECTOR3 m_move;			// 移動量
+	D3DXVECTOR3	m_move;			// 移動量
 	float		m_fMoveSpeed;	// 移動速度
 	bool		m_bCollision;	// 接触判定
-	bool		m_bJump;		// ジャンプ判定
+	int			m_nFrame;		// モーションフレーム
+	int			m_nSave;			// モーション制御
 	Player_Motion m_motion;		// モーション
 };
 

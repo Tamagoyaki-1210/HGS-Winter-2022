@@ -12,9 +12,9 @@
 // 曲の場所を設定
 CSound::SOUNDPARAM CSound::g_aParam[SOUND_LABEL_MAX] =
 {
-	{ "data/SOUNDS/BGM/タイトルBGM.wav", -1 },
-	{ "data/SOUNDS/BGM/ゲームBGM.wav", -1 },
-	{ "data/SOUNDS/BGM/リザルトBGM.wav", -1 },
+	{ "data/SOUNDS/BGM/title.wav", -1 },
+	{ "data/SOUNDS/BGM/game.wav", -1 },
+	{ "data/SOUNDS/BGM/result.wav", -1 },
 
 	{ "data/SOUNDS/SE/選択/選択SE.wav", 0 },
 	{ "data/SOUNDS/SE/決定/決定SE.wav", 0 },
