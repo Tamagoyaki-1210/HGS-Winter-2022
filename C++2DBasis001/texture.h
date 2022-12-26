@@ -26,7 +26,6 @@ public:
 		TEXTURE_PLAYER,				//プレイヤー
 		TEXTURE_GOAL,			//ゴール
 		TEXTURE_BLOCK,		//ブロック
-		TEXTURE_NEEDLEBALL,	//棘ボール
 		TEXTURE_THRON,		//草の生えた地面
 		TEXTURE_UPBLOCK,		//草の生えた地面
 		TEXTURE_DOWNBLOCK,		//草の生えた地面
