@@ -98,6 +98,11 @@ void CPlayer::Update()
 		pos.x = 640.0f;
 	}
 
+	// プレイヤー落下処理
+	if (pos.y > SCREEN_HEIGHT + 200.0f)
+	{
+		CApplication::GetInstance()->SetMode(CApplication::Mode_Result);
+	}
 
 	//位置設定処理
 	CObject_2D::SetPos(pos);
@@ -124,27 +129,14 @@ void CPlayer::Input()
 	//プレイヤー移動
 	if (pInput->KeyDown(DIK_D))
 	{//右移動
-		if (pInput->KeyDown(DIK_W, true) && GetGround())
-		{//上移動
-			m_move += NormalizeLength(1.0f, -1);
-			m_move.y -= Jump_Power;
-			SetGround(false);
-		}
 		m_move.x += 1.0f;
 	}
 	else if (pInput->KeyDown(DIK_A))
 	{//左移動
-		if (pInput->KeyDown(DIK_W, true) && GetGround())
-		{//上移動
-			m_move += NormalizeLength(-1.0f, -1);
-			m_move.y -= Jump_Power;
-			SetGround(false);
-		}
 		m_move.x += -1.0f;
 	}
-	else if (pInput->KeyDown(DIK_W, true) && GetGround())
+	if ((pInput->KeyDown(DIK_W, true) || pInput->KeyDown(DIK_SPACE, true)) && GetGround())
 	{//上移動
-		m_move += NormalizeLength(0.0f, -1);
 		m_move.y -= Jump_Power;
 		SetGround(false);
 	}
