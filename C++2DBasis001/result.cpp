@@ -32,7 +32,8 @@ HRESULT CResult::Init()
 {
 	CApplication::GetInstance()->GetSound()->Play(CSound::SOUND_LABEL_BGM_RESULT);
 
-    CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(100, 100));
+	CObject_2D* mObj = CObject_2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR2(12800.0f, 720.0f));
+	mObj->SetTexture(CTexture::TEXTURE_SPACEBG);
 
     CFontString::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, 0.0f), D3DXVECTOR2(80, 80), "リザルト");
 
